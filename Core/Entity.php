@@ -1,5 +1,5 @@
 <?php
-namespace OCFram;
+namespace Core;
  
 abstract class Entity implements \ArrayAccess
 {

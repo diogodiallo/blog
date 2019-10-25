@@ -1,5 +1,5 @@
 <?php
-namespace OCFram;
+namespace Core;
  
 class NotNullValidator extends Validator
 {

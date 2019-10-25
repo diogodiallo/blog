@@ -1,5 +1,6 @@
 <?php
-namespace OCFram;
+
+namespace Core;
  
 session_start();
  
