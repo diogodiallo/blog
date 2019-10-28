@@ -20,27 +20,27 @@ class Router
   {
     foreach ($this->routes as $route)
     {
-      // Si la route correspond à l'URL
+      // If the route matches the URL
       if (($varsValues = $route->match($url)) !== false)
       {
-        // Si elle a des variables
+        // If it has variables
         if ($route->hasVars())
         {
           $varsNames = $route->varsNames();
           $listVars = [];
  
-          // On crée un nouveau tableau clé/valeur
-          // (clé = nom de la variable, valeur = sa valeur)
+          // We create a new key / value table
+          // (key = name of the variable, value = its value)
           foreach ($varsValues as $key => $match)
           {
-            // La première valeur contient entièrement la chaine capturée (voir la doc sur preg_match)
+            // he first value fully contains the captured string (see the doc on preg_match)
             if ($key !== 0)
             {
               $listVars[$varsNames[$key - 1]] = $match;
             }
           }
  
-          // On assigne ce tableau de variables � la route
+          // This table of variables is assigned to the road
           $route->setVars($listVars);
         }
  

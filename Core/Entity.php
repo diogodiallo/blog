@@ -5,14 +5,14 @@ abstract class Entity implements \ArrayAccess
 {
   use Hydrator;
  
-  protected $erreurs = [],
-            $id;
+  protected $errors = [];
+  protected $id;
  
-  public function __construct(array $donnees = [])
+  public function __construct(array $data = [])
   {
-    if (!empty($donnees))
+    if (!empty($data))
     {
-      $this->hydrate($donnees);
+      $this->hydrate($data);
     }
   }
  
@@ -21,9 +21,9 @@ abstract class Entity implements \ArrayAccess
     return empty($this->id);
   }
  
-  public function erreurs()
+  public function errors()
   {
-    return $this->erreurs;
+    return $this->errors;
   }
  
   public function id()
