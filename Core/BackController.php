@@ -20,10 +20,10 @@ abstract class BackController extends ApplicationComponent
     $this->setAction($action);
     $this->setView($action);
   }
- 
+
   public function execute()
   {
-    $method = 'execute'.ucfirst($this->action);
+    $method = strtolower($this->action);
  
     if (!is_callable([$this, $method]))
     {

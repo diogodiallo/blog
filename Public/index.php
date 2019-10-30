@@ -10,7 +10,7 @@
 
     require __DIR__.'/../Core/SplClassLoader.php';
 
-    $coreLoader = new SplClassLoader('Core', __DIR__.'/../');
+    $coreLoader = new SplClassLoader('Core', __DIR__.'/..');
     $coreLoader->register();
 
     $appLoader = new SplClassLoader('App', __DIR__.'/..');
