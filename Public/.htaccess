@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^admin/ index.php?app=Backend [QSA,L]
+RewriteRule ^(.*)$ index.php?app=Frontend [QSA,L]
