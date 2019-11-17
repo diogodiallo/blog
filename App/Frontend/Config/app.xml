@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions>
+    <define var="number_posts_by_page" value="5"></define>
+    <define var="character_maxlength" value="250"></define>
+</definitions>

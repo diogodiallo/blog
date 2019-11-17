@@ -1,6 +1,7 @@
 <?php
+
 namespace Core;
- 
+
 abstract class ApplicationComponent
 {
   protected $app;

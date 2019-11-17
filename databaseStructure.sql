@@ -1,4 +1,4 @@
-DROP DATABASE blogpro;
+-- DROP DATABASE blogpro;
 -- Create database
 
 CREATE DATABASE blogpro;

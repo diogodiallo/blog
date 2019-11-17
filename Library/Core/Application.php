@@ -1,4 +1,5 @@
 <?php
+
 namespace Core;
  
 abstract class Application
@@ -24,7 +25,7 @@ abstract class Application
     $router = new Router;
  
     $xml = new \DOMDocument;
-    $xml->load(__DIR__.'/../../App/'.$this->name.'/Config/routes.xml');
+    $xml->load('../App/'.$this->name.'/Config/routes.xml');
  
     $routes = $xml->getElementsByTagName('route');
  
