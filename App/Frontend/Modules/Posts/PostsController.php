@@ -10,12 +10,6 @@ use \Core\FormHandler;
  
 class PostsController extends BackController
 {
-  public function home()
-  {
-    $this->page->addVar('title', 'Blog professionnel');
-    $this->page->addVar('home', 'Page d\'accueil du site');
-  }
-
   public function index(HTTPRequest $request)
   {
     $postsNumber = $this->app->config()->get('number_posts_by_page');
@@ -81,8 +75,7 @@ class PostsController extends BackController
     if ($formHandler->process())
     {
       $this->app->user()->setFlash('Le commentaire a bien été ajouté, merci !');
- 
-      $this->app->httpResponse()->redirect('news-'.$request->getData('post_id').'.html');
+      $this->app->httpResponse()->redirect('post-'.$request->getData('post_id').'.html');
     }
  
     $this->page->addVar('comment', $comment);

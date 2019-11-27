@@ -11,32 +11,11 @@ use \Core\FormHandler;
  
 class PostsController extends BackController
 {
-  public function delete(HTTPRequest $request)
-  {
-    $postId = $request->getData('id');
- 
-    $this->managers->getManagerOf('Post')->delete($postId);
-    $this->managers->getManagerOf('Comments')->deleteFromPost($postId);
- 
-    $this->app->user()->setFlash('La news a bien été supprimée !');
- 
-    $this->app->httpResponse()->redirect('.');
-  }
- 
-  public function deleteComment(HTTPRequest $request)
-  {
-    $this->managers->getManagerOf('Comments')->delete($request->getData('id'));
- 
-    $this->app->user()->setFlash('Le commentaire a bien été supprimé !');
- 
-    $this->app->httpResponse()->redirect('.');
-  }
- 
   public function index(HTTPRequest $request)
   {
     $this->page->addVar('title', 'Gestion des news');
  
-    $manager = $this->managers->getManagerOf('Post');
+    $manager = $this->managers->getManagerOf('Posts');
  
     $this->page->addVar('posts', $manager->getList());
     $this->page->addVar('posts_number', $manager->count());
@@ -89,20 +68,43 @@ class PostsController extends BackController
  
     $this->page->addVar('form', $form->createView());
   }
+
+  public function delete(HTTPRequest $request)
+  {
+    $postId = $request->getData('id');
  
-  public function processForm(HTTPRequest $request)
+    $this->managers->getManagerOf('Post')->delete($postId);
+    $this->managers->getManagerOf('Comments')->deleteFromPost($postId);
+ 
+    $this->app->user()->setFlash('La news a bien été supprimée !');
+ 
+    $this->app->httpResponse()->redirect('.');
+  }
+ 
+  public function deleteComment(HTTPRequest $request)
+  {
+    $this->managers->getManagerOf('Comments')->delete($request->getData('id'));
+ 
+    $this->app->user()->setFlash('Le commentaire a bien été supprimé !');
+ 
+    $this->app->httpResponse()->redirect('.');
+  }
+ 
+  private function processForm(HTTPRequest $request)
   {
     if ($request->method() == 'POST')
     {
-      $news = new News([
-        'auteur' => $request->postData('auteur'),
-        'titre' => $request->postData('titre'),
-        'contenu' => $request->postData('contenu')
+      $post = new Post([
+        //'auteur' => $request->postData('auteur'),
+        'title' => $request->postData('title'),
+        'slug' => $request->postData('slug'),
+        'resume' => $request->postData('resume'),
+        'content' => $request->postData('content')
       ]);
  
       if ($request->getExists('id'))
       {
-        $news->setId($request->getData('id'));
+        $post->setId($request->getData('id'));
       }
     }
     else
@@ -110,24 +112,26 @@ class PostsController extends BackController
       // L'identifiant de la news est transmis si on veut la modifier
       if ($request->getExists('id'))
       {
-        $news = $this->managers->getManagerOf('News')->getUnique($request->getData('id'));
+        $post = $this->managers->getManagerOf('Posts')->getUnique($request->getData('id'));
       }
       else
       {
-        $news = new News;
+        $post = new Post;
       }
     }
  
-    $formBuilder = new NewsFormBuilder($news);
+    $formBuilder = new PostsFormBuilder($post);
     $formBuilder->build();
  
     $form = $formBuilder->form();
  
-    $formHandler = new FormHandler($form, $this->managers->getManagerOf('News'), $request);
+    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Posts'), $request);
  
     if ($formHandler->process())
     {
-      $this->app->user()->setFlash($news->isNew() ? 'La news a bien été ajoutée !' : 'La news a bien été modifiée !');
+      $this->app->user()->setFlash($post->isNew() 
+                      ? 'La news a bien été ajoutée !' 
+                      : 'La news a bien été modifiée !');
  
       $this->app->httpResponse()->redirect('/admin/');
     }

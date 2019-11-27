@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="author" content="Diogo DIALLO - formation chez Openclassrooms">
     <meta name="generator" content="Jekyll v3.8.5">
     <title><?php $title ?? 'Backend du blog'; ?></title>
 
@@ -22,25 +22,43 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="">DD Blog</a>
+            <a class="navbar-brand" href="/">DD Blog</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" 
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/"><i class="fa fa-home"></i> Accueil</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">Qui suis-je?</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Qui suis-je?</a>
+                    <a class="nav-link" href="/posts">Articles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Articles</a>
+                    <a class="nav-link" href="/contact">Contactez-moi</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contactez-moi</a>
-                </li>
+                <?php if ($user->isAuthenticated()): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/post-insert.html">Ajouter un article</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?logout.html">Déconnexion</a>
+                    </li>
+                <?php else: ?>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/admin/"><i class="fa fa-home"></i> Accueil</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/admin/login"><i class="fa fa-signin-in-alt"></i> Connexion</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/admin/register"><i class="fa fa-arrow-alt-circle-up"></i> Inscripton</a>
+                    </li>
+                <?php endif; ?>  
             </ul>
             <form class="form-inline mt-2 mt-md-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
@@ -51,12 +69,12 @@
     </header>
 
     <main role="main">
-        <div class="container">
+        <div class="container mt-5">
             <?= $content; ?>
         </div>
 
         <!-- FOOTER -->
-        <footer class="container">
+        <footer class="container fixed-bottom">
             <p class="float-right"><a href="#">Back to top</a></p>
             <p>&copy; 2017-2019 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
         </footer>
@@ -73,5 +91,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
         crossorigin="anonymous"></script>
+
+<!-- Fontawesome -->
+<script src="https://kit.fontawesome.com/4f4d950f15.js" crossorigin="anonymous"></script>
   </body>
 </html>

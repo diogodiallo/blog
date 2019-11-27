@@ -9,10 +9,10 @@ class Post extends Entity
 {
     protected $id;
     protected $title;
+    protected $slug;
     protected $content;
     protected $created_at;
     protected $updated_at;
-    protected $slug;
 
     const TITLE_INVALID = 2;
     const CONTENT_INVALID = 3;

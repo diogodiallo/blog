@@ -8,18 +8,26 @@ class PostsManagerPDO extends PostsManager
 {
   protected function add(Post $post)
   {
-    $requete = $this->dao->prepare('INSERT INTO posts SET title = :title, content = :content, 
-                                    created_at = NOW(), updated_at = NOW()');
+    $requete = $this->dao->prepare('INSERT INTO posts 
+                                    SET title = :title,
+                                        slug = :slug,
+                                        content = :content,
+                                        resume = :resume,  
+                                        created_at = NOW(), 
+                                        updated_at = NOW()
+                                  ');
  
     $requete->bindValue(':title', $post->title());
+    $requete->bindValue(':slug', $post->slug());
     $requete->bindValue(':content', $post->content());
+    $requete->bindValue(':resume', mb_substr($post->content, 0, 100).'...');
  
     $requete->execute();
   }
  
   public function count()
   {
-    return $this->dao->query('SELECT COUNT(*) FROM posts')->fetchColumn();
+    return $this->dao->query('SELECT COUNT(id) FROM posts')->fetchColumn();
   }
  
   public function delete($id)

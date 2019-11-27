@@ -89,12 +89,12 @@ ALTER TABLE comments
 ADD CONSTRAINT fk_comment_user_id 
     FOREIGN KEY (user_id)
 	REFERENCES users (id)
-		ON UPDATE RESTRICT;
+		ON DELETE RESTRICT;
 
 ALTER TABLE comments 
 ADD CONSTRAINT fk_comment_post_id 
     FOREIGN KEY (post_id)
 	REFERENCES posts (id)
-		ON UPDATE RESTRICT;
+		ON DELETE RESTRICT;
 
 

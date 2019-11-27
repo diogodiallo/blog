@@ -8,7 +8,7 @@ class CommentsManagerPDO extends CommentsManager
   protected function add(Comment $comment)
   {
     $q = $this->dao->prepare('INSERT INTO comments SET post_id = :post_id, content = :content, 
-                              comment_created_at = NOW()');
+                              created_at = NOW()');
  
     $q->bindValue(':post_id', $comment->post_id(), \PDO::PARAM_INT);
     $q->bindValue(':content', $comment->content());
@@ -35,7 +35,9 @@ class CommentsManagerPDO extends CommentsManager
       throw new \InvalidArgumentException('L\'identifiant de la post passé doit être un nombre entier valide');
     }
  
-    $q = $this->dao->prepare('SELECT id, post_id, content, created_at FROM comments WHERE post_id = :post_id');
+    $q = $this->dao->prepare('SELECT id, post_id, content, created_at 
+                              FROM comments 
+                              WHERE post_id = :post_id');
     $q->bindValue(':post_id', $post, \PDO::PARAM_INT);
     $q->execute();
  

@@ -11,7 +11,8 @@ class Page extends ApplicationComponent
   {
     if (!is_string($var) || is_numeric($var) || empty($var))
     {
-      throw new \InvalidArgumentException('Le nom de la variable doit être une chaine de caractères non nulle');
+      throw new \InvalidArgumentException('Le nom de la variable doit être une chaine de 
+                                            caractères non nulle');
     }
  
     $this->vars[$var] = $value;
