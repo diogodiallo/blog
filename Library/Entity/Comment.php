@@ -7,7 +7,7 @@ class Comment extends Entity
 {
   protected $post_id;
   protected $content;
-  protected $comment_created_at;
+  protected $created_at;
  
   const CONTENT_INVALID = 1;
  
@@ -31,9 +31,9 @@ class Comment extends Entity
     $this->content = $content;
   }
   
-  public function setComment_created_at(\DateTime $comment_created_at)
+  public function setCreated_at(\DateTime $created_at)
   {
-    $this->comment_created_at = $comment_created_at;
+    $this->created_at = $created_at;
   }
  
   public function post_id()
@@ -46,8 +46,8 @@ class Comment extends Entity
     return $this->content;
   }
   
-  public function comment_created_at()
+  public function created_at()
   {
-    return $this->comment_created_at;
+    return $this->created_at;
   }
 }

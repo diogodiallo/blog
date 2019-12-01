@@ -1,11 +1,15 @@
 <h1>Connexion</h1>
  
 <form action="" method="post">
-  <label>Pseudo</label>
-  <input type="text" name="login" /><br />
+  <p>
+    <label>Pseudo</label>
+    <input type="text" name="login" />
+  </p>
  
-  <label>Mot de passe</label>
-  <input type="password" name="password" /><br /><br />
+  <p>
+    <label>Mot de passe</label>
+    <input type="password" name="password" />
+  </p>
  
-  <input type="submit" value="Connexion" />
+  <input type="submit" class="btn btn-info" value="Connexion" />
 </form>

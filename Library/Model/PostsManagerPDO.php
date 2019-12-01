@@ -10,17 +10,15 @@ class PostsManagerPDO extends PostsManager
   {
     $requete = $this->dao->prepare('INSERT INTO posts 
                                     SET title = :title,
-                                        slug = :slug,
+                                        resume = :resume,
                                         content = :content,
-                                        resume = :resume,  
                                         created_at = NOW(), 
                                         updated_at = NOW()
                                   ');
  
     $requete->bindValue(':title', $post->title());
-    $requete->bindValue(':slug', $post->slug());
+    $requete->bindValue(':resume', $post->resume());
     $requete->bindValue(':content', $post->content());
-    $requete->bindValue(':resume', mb_substr($post->content, 0, 100).'...');
  
     $requete->execute();
   }
@@ -37,7 +35,9 @@ class PostsManagerPDO extends PostsManager
  
   public function getList($debut = -1, $limite = -1)
   {
-    $sql = 'SELECT id, title, content, created_at, updated_at FROM posts ORDER BY id DESC';
+    $sql = 'SELECT id, title, resume, content, created_at, updated_at 
+            FROM posts 
+            ORDER BY id DESC';
  
     if ($debut != -1 || $limite != -1)
     {
@@ -62,7 +62,7 @@ class PostsManagerPDO extends PostsManager
  
   public function getUnique($id)
   {
-    $requete = $this->dao->prepare('SELECT id, title, slug, content, created_at, updated_at 
+    $requete = $this->dao->prepare('SELECT id, title, resume, content, created_at, updated_at 
                                     FROM posts WHERE id = :id');
     $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
     $requete->execute();
@@ -82,11 +82,11 @@ class PostsManagerPDO extends PostsManager
  
   protected function modify(Post $post)
   {
-    $requete = $this->dao->prepare('UPDATE posts SET title = :title, slug = :slug, 
+    $requete = $this->dao->prepare('UPDATE posts SET title = :title, resume = :resume,
                                       content = :content, updated_at = NOW() WHERE id = :id');
  
     $requete->bindValue(':title', $post->title());
-    $requete->bindValue(':slug', $post->slug());
+    $requete->bindValue(':resume', $post->resume());
     $requete->bindValue(':content', $post->content());
     $requete->bindValue(':id', $post->id(), \PDO::PARAM_INT);
  

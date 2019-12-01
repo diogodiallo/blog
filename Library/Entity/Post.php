@@ -3,13 +3,13 @@
 namespace Entity;
 
 use \Core\Entity;
-use \Cocur\Slugify\Slugify;
+//use \Cocur\Slugify\Slugify;
 
 class Post extends Entity
 {
     protected $id;
     protected $title;
-    protected $slug;
+    protected $resume;
     protected $content;
     protected $created_at;
     protected $updated_at;
@@ -19,7 +19,7 @@ class Post extends Entity
    
     public function isValid()
     {
-      return !(empty($this->slug) || empty($this->title) || empty($this->content));
+      return !( empty($this->title) || empty($this->content) );
     }
 
     /**
@@ -64,13 +64,6 @@ class Post extends Entity
 
         
         $this->title = $title;  
-    }
-
-    public function slug()
-    {
-        $slugify = new Slugify;
-
-        $this->slug = $slugify->slugify($this->title);
     }
 
     /**
@@ -130,5 +123,25 @@ class Post extends Entity
     public function setUpdated_at(\DateTime $updated_at)
     {
         $this->updated_at = $updated_at;
+    }
+
+    /**
+     * Get the value of resume
+     */ 
+    public function resume()
+    {
+        return $this->resume;
+    }
+
+    /**
+     * Set the value of resume
+     *
+     * @return  self
+     */ 
+    public function setResume($resume)
+    {
+        $this->resume = $resume;
+
+        return $this;
     }
 } 

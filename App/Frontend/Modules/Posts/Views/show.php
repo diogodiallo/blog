@@ -1,6 +1,10 @@
 <p>Par <em>Jean (ici user)</em>, le <?= $post['created_at']->format('d/m/Y à H\hi') ?></p>
 <h2><?= $post['title'] ?></h2>
-<p><?= nl2br($post['content']) ?></p>
+<p class="px-3 bg-secondary text-light">
+    <strong>Resumé :</strong> <br> 
+    <?= $post['resume'] ?>
+</p>
+<div><?= nl2br($post['content']) ?></div>
  
 <?php if ($post['created_at'] != $post['updated_at']): ?>
     <p class="float-right">
@@ -10,7 +14,11 @@
     </p>
 <?php endif; ?>
  
-<p><a href="commenter-<?= $post['id'] ?>.html">Ajouter un commentaire</a></p>
+<p>
+  <a href="commenter-<?= $post['id'] ?>.html" class="mt-4 btn btn-primary">
+    Ajouter un commentaire
+  </a>
+</p>
  
 <?php
 if (empty($comments)):?>
@@ -20,8 +28,10 @@ if (empty($comments)):?>
 <?php foreach ($comments as $comment): ?>
 <fieldset>
   <legend>
-    Posté par <strong>Jean <!--(ici authenticated username) htmlspecialchars($comment['post_id'])--></strong> 
-    le <?= strftime("%d/%m/%Y á %H:%M", strtotime($comment['created_at'])); ?>
+    Posté par <strong>Jean 
+          <!--(ici authenticated username) htmlspecialchars($comment['post_id'])-->
+        </strong> 
+    le <?= $comment['created_at']->format('d/m/Y á H\hi'); ?>
     <?php if ($user->isAuthenticated()): ?> -
       <a href="admin/comment-update-<?= $comment['id'] ?>.html">Modifier</a> |
       <a href="admin/comment-delete-<?= $comment['id'] ?>.html">Supprimer</a>

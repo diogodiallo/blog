@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="Diogo DIALLO - formation chez Openclassrooms">
+    <meta name="author" content="Diogo DIALLO ">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title><?php $title ?? 'Backend du blog'; ?></title>
+    <title><?= $title ?? 'Backend du blog'; ?></title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
@@ -17,18 +17,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/united/bootstrap.min.css">
 
     <!-- Custom styles for this template -->
-    <link href="css/design.css" rel="stylesheet">
+    <link href="/Public/css/design.css" rel="stylesheet" type="text/css">
   </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="/">DD Blog</a>
+            <a class="navbar-brand" href="/"><abbr title="Diogo DIALLO">DD</abbr> Blog</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" 
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">
+                        <i class="fa fa-home"></i> Accueil
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/about">Qui suis-je?</a>
                 </li>
@@ -43,20 +48,25 @@
                         <a class="nav-link" href="/admin/">Admin</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/post-insert.html">Ajouter un article</a>
+                        <a class="nav-link" href="/admin/post-insert.html">
+                            Ajouter un article
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="?logout.html">Déconnexion</a>
+                        <a class="nav-link bg bg-danger text-white" 
+                            href="/admin/logout.html">Déconnexion
+                        </a>
                     </li>
                 <?php else: ?>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/admin/"><i class="fa fa-home"></i> Accueil</a>
+                        <a class="nav-link" href="/admin/login">
+                            <i class="fas fa-sign-in-alt"></i> Connexion
+                        </a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/admin/login"><i class="fa fa-signin-in-alt"></i> Connexion</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/admin/register"><i class="fa fa-arrow-alt-circle-up"></i> Inscripton</a>
+                        <a class="nav-link" href="/admin/register">
+                            <i class="fa fa-arrow-alt-circle-up"></i> Inscripton
+                        </a>
                     </li>
                 <?php endif; ?>  
             </ul>
@@ -76,7 +86,9 @@
         <!-- FOOTER -->
         <footer class="container fixed-bottom">
             <p class="float-right"><a href="#">Back to top</a></p>
-            <p>&copy; 2017-2019 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+            <p>&copy; 2017-2019 Company, Inc. &middot; 
+                <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
+            </p>
         </footer>
     </main>
 

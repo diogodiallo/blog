@@ -47,7 +47,7 @@ class CommentsManagerPDO extends CommentsManager
  
     foreach ($comments as $comment)
     {
-      $comment->setComment_created_at(new \DateTime($comment->comment_created_at()));
+      $comment->setCreated_at(new \DateTime($comment->created_at()));
     }
  
     return $comments;

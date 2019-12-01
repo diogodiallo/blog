@@ -10,7 +10,7 @@
       
       <h2><a href="post-<?= $post['id'] ?>.html"><?= $post['title'] ?></a></h2>
       <div>
-        <?= nl2br($post['content']) ?>
+        <?= $post['resume'] ?>
       </div>
       <p><a class="btn btn-secondary"  href="post-<?= $post['id'] ?>.html">Voir plus &raquo;</a></p>
     </div>

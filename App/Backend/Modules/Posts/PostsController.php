@@ -13,8 +13,8 @@ class PostsController extends BackController
 {
   public function index(HTTPRequest $request)
   {
-    $this->page->addVar('title', 'Gestion des news');
- 
+    $this->page->addVar('title', 'Gestion des articles');
+
     $manager = $this->managers->getManagerOf('Posts');
  
     $this->page->addVar('posts', $manager->getList());
@@ -73,7 +73,7 @@ class PostsController extends BackController
   {
     $postId = $request->getData('id');
  
-    $this->managers->getManagerOf('Post')->delete($postId);
+    $this->managers->getManagerOf('Posts')->delete($postId);
     $this->managers->getManagerOf('Comments')->deleteFromPost($postId);
  
     $this->app->user()->setFlash('La news a bien été supprimée !');
@@ -90,14 +90,19 @@ class PostsController extends BackController
     $this->app->httpResponse()->redirect('.');
   }
  
+  public function logout()
+  {
+    $this->app->user()->setAuthenticated(false);
+    $this->app->user()->setFlash('Vous êtes déconnecté!');
+    $this->app->httpResponse()->redirect('/');
+  }
+
   private function processForm(HTTPRequest $request)
   {
     if ($request->method() == 'POST')
     {
       $post = new Post([
-        //'auteur' => $request->postData('auteur'),
         'title' => $request->postData('title'),
-        'slug' => $request->postData('slug'),
         'resume' => $request->postData('resume'),
         'content' => $request->postData('content')
       ]);

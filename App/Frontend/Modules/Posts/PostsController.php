@@ -28,7 +28,7 @@ class PostsController extends BackController
         $start = substr($post->content(), 0, $charactersNumber);
         $start = substr($start, 0, strrpos($start, ' ')) . '...';
  
-        $post->setContenu($start);
+        $post->setContent($start);
       }
     }
  
@@ -83,10 +83,10 @@ class PostsController extends BackController
     $this->page->addVar('title', 'Ajout d\'un commentaire');
   }
 
-  public function disconnect(HTTPRequest $request)
+/*   public function lgout(HTTPRequest $request)
   {
       $this->app->user()->setAuthenticated(false);
       $this->app->user()->setFlash('Vous êtes déconnecté.');
       $this->app->httpResponse()->redirect('/');
-  }
+  } */
 }
