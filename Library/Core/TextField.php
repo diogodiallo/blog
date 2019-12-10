@@ -17,7 +17,7 @@ class TextField extends Field
     }
     
     
-    $widget .= '<label>'.$this->label.'</label><textarea name="'.$this->name.'"';
+    $widget .= '<label>'.$this->label.' : </label><textarea name="'.$this->name.'"';
  
     if (!empty($this->cols))
     {

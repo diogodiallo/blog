@@ -58,11 +58,11 @@
                 <?php else: ?>
                     <li class="nav-item active">
                         <a class="nav-link" href="/admin/login">
-                            <i class="fa fa-signin-in-alt"></i> Connexion
+                            <i class="fa fa-sign-in-alt"></i> Connexion
                         </a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/admin/register">
+                        <a class="nav-link" href="/register">
                             <i class="fa fa-arrow-alt-circle-up"></i> Inscripton
                         </a>
                     </li>

@@ -8,7 +8,7 @@ class CommentsManagerPDO extends CommentsManager
   protected function add(Comment $comment)
   {
     $q = $this->dao->prepare('INSERT INTO comments SET post_id = :post_id, content = :content, 
-                              created_at = NOW()');
+                              created_at = NOW(), updated_at = NOW()');
  
     $q->bindValue(':post_id', $comment->post_id(), \PDO::PARAM_INT);
     $q->bindValue(':content', $comment->content());
@@ -55,7 +55,8 @@ class CommentsManagerPDO extends CommentsManager
  
   protected function modify(Comment $comment)
   {
-    $q = $this->dao->prepare('UPDATE comments SET content = :content WHERE id = :id');
+    $q = $this->dao->prepare('UPDATE comments SET content = :content, updated_at = NOW(), 
+                              WHERE id = :id');
  
     $q->bindValue(':content', $comment->content());
     $q->bindValue(':id', $comment->id(), \PDO::PARAM_INT);
@@ -65,7 +66,7 @@ class CommentsManagerPDO extends CommentsManager
  
   public function get($id)
   {
-    $q = $this->dao->prepare('SELECT id, post_id, contenu FROM comments WHERE id = :id');
+    $q = $this->dao->prepare('SELECT id, post_id, content FROM comments WHERE id = :id');
     $q->bindValue(':id', (int) $id, \PDO::PARAM_INT);
     $q->execute();
  
@@ -73,4 +74,18 @@ class CommentsManagerPDO extends CommentsManager
  
     return $q->fetch();
   }
+
+  public function getListComments()
+  {
+    $q = $this->dao->prepare('SELECT id, post_id, created_at, validate, content 
+                              FROM comments 
+                              WHERE validate = 0');
+    $q->execute();
+ 
+    $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
+ 
+    return $q->fetchAll();
+  }
+
+  // TODO :: Add validation comment button
 }

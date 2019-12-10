@@ -64,4 +64,10 @@ abstract class CommentsManager extends Manager
    * @return Comment
    */
   abstract public function get($id);
+
+  /**
+   * Methode permettant d'obtenir la iste des commentaires non validés
+   * @return void
+   */
+  abstract public function getListComments();
 }

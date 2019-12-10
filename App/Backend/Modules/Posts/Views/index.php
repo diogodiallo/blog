@@ -1,5 +1,5 @@
 <h1 class="mt-5 text-center">Il y a actuellement <?= $posts_number ?> article(s).</h1>
- 
+
 <table class="table table-strip">
     <tr>
        <th>ID</th>
@@ -15,7 +15,8 @@
         <td>
             <?= ($post['created_at'] == $post['updated_at'] 
                 ? '-' 
-                : 'le '.$post['updated_at']->format('d/m/Y à H\hi'))
+                : 'le '.$post['updated_at']->format('d/m/Y à H\hi')
+                )
             ?> 
         </td>
         <td>
@@ -30,3 +31,10 @@
     </tr>
     <?php endforeach; ?>
 </table>
+
+<hr>
+<p class="text-center">
+    <a href="/admin/list-comments.html" class="btn btn-outline-secondary">
+        Voir les commentaires en attente de modération
+    </a>
+</p>

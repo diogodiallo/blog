@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <routes>
   <route url="/admin/" module="Posts" action="index" />
+  <route url="/admin/list-comments\.html" module="Posts" action="listComments" />
   <route url="/admin/post-insert\.html" module="Posts" action="insert" />
   <route url="/admin/post-update-([0-9]+)\.html" module="Posts" action="update" vars="id" />
   <route url="/admin/post-delete-([0-9]+)\.html" module="Posts" action="delete" vars="id" />
   <route url="/admin/comment-update-([0-9]+)\.html" module="Posts" action="updateComment" vars="id" />
   <route url="/admin/comment-delete-([0-9]+)\.html" module="Posts" action="deleteComment" vars="id" />
+  
   <route url="/admin/logout\.html" module="Posts" action="logout" />
 </routes>

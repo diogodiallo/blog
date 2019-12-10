@@ -7,6 +7,7 @@ class Comment extends Entity
 {
   protected $post_id;
   protected $content;
+  //protected $validate;
   protected $created_at;
  
   const CONTENT_INVALID = 1;
@@ -50,4 +51,24 @@ class Comment extends Entity
   {
     return $this->created_at;
   }
+
+  /**
+   * Get the value of validate
+   */ 
+  // public function validate()
+  // {
+  //   return $this->validate;
+  // }
+
+  /**
+   * Set the value of validate
+   *
+   * @return  self
+   */ 
+  // public function setValidate($validate)
+  // {
+  //   $this->validate = $validate;
+
+  //   return $this;
+  // }
 }

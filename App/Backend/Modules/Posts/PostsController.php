@@ -18,7 +18,15 @@ class PostsController extends BackController
     $manager = $this->managers->getManagerOf('Posts');
  
     $this->page->addVar('posts', $manager->getList());
+    
     $this->page->addVar('posts_number', $manager->count());
+  }
+
+  public function listComments()
+  {
+    $this->page->addVar('title', 'Liste commentaires');
+    $managerComments = $this->managers->getManagerOf('Comments');
+    $this->page->addVar('comments', $managerComments->getListComments());
   }
  
   public function insert(HTTPRequest $request)
@@ -32,7 +40,7 @@ class PostsController extends BackController
   {
     $this->processForm($request);
  
-    $this->page->addVar('title', 'Modification d\'une news');
+    $this->page->addVar('title', 'Modification d\'un article');
   }
  
   public function updateComment(HTTPRequest $request)
@@ -43,9 +51,13 @@ class PostsController extends BackController
     {
       $comment = new Comment([
         'id' => $request->getData('id'),
-        'auteur' => $request->postData('auteur'),
-        'contenu' => $request->postData('contenu')
+        //'auteur' => $request->postData('auteur'),
+        'content' => $request->postData('content')
       ]);
+
+      $this->app->user()->setFlash('Le commentaire a bien été modifié');
+ 
+      $this->app->httpResponse()->redirect('/admin/');
     }
     else
     {
@@ -76,7 +88,7 @@ class PostsController extends BackController
     $this->managers->getManagerOf('Posts')->delete($postId);
     $this->managers->getManagerOf('Comments')->deleteFromPost($postId);
  
-    $this->app->user()->setFlash('La news a bien été supprimée !');
+    $this->app->user()->setFlash('Le post a bien été supprimé!');
  
     $this->app->httpResponse()->redirect('.');
   }
@@ -85,7 +97,7 @@ class PostsController extends BackController
   {
     $this->managers->getManagerOf('Comments')->delete($request->getData('id'));
  
-    $this->app->user()->setFlash('Le commentaire a bien été supprimé !');
+    $this->app->user()->setFlash('Le commentaire a bien été supprimé!');
  
     $this->app->httpResponse()->redirect('.');
   }

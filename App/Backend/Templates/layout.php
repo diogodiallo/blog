@@ -44,7 +44,7 @@
                     <a class="nav-link" href="/contact">Contactez-moi</a>
                 </li>
                 <?php if ($user->isAuthenticated()): ?>
-                    <li class="nav-item">
+                    <li class="nav-item ml-5">
                         <a class="nav-link" href="/admin/">Admin</a>
                     </li>
                     <li class="nav-item">

@@ -11,15 +11,6 @@ class PostsFormBuilder extends FormBuilder
 {
   public function build()
   {
-    // $this->form->add(new StringField([
-    //     'label' => 'Auteur',
-    //     'name' => 'auteur',
-    //     'maxLength' => 20,
-    //     'validators' => [
-    //       new MaxLengthValidator('L\'auteur spécifié est trop long (20 caractères maximum)', 20),
-    //       new NotNullValidator('Merci de spécifier l\'auteur de la news'),
-    //     ],
-    //    ]))
        $this->form->add(new StringField([
         'label' => 'Titre',
         'name' => 'title',
@@ -27,6 +18,15 @@ class PostsFormBuilder extends FormBuilder
         'validators' => [
           new MaxLengthValidator('Le titre spécifié est trop long (100 caractères maximum)', 100),
           new NotNullValidator('Merci de spécifier le titre de la news'),
+        ],
+       ]))
+       ->add(new TextField([
+        'label' => 'Resumé',
+        'name' => 'resume',
+        'rows' => 5,
+        'cols' => 60,
+        'validators' => [
+          new NotNullValidator('Merci de spécifier le resumé du post'),
         ],
        ]))
        ->add(new TextField([

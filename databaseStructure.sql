@@ -9,9 +9,12 @@ USE blogpro;
 
 CREATE TABLE  users (
 	id SMALLINT UNSIGNED AUTO_INCREMENT,
-	pseudo VARCHAR(50) NOT NULL,
+	username VARCHAR(50) NOT NULL,
 	email VARCHAR(250) NOT NULL,
 	password VARCHAR(255) NOT NULL,
+	lastname VARCHAR(100),
+	firstname VARCHAR(150),
+	valid BOOLEAN NOT NULL DEFAULT false,
 	created_at DATETIME NOT NULL,
 	PRIMARY KEY (id)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET utf8;
@@ -71,8 +74,8 @@ CREATE TABLE  comments (
 CREATE UNIQUE INDEX ind_uni_email
 ON users (email);
 
-CREATE UNIQUE INDEX ind_uni_pseudo
-ON users (pseudo);
+CREATE UNIQUE INDEX ind_uni_username
+ON users (username);
 
 CREATE UNIQUE INDEX ind_uni_title
 ON posts (title);

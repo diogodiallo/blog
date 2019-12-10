@@ -3,6 +3,7 @@
   <p>
     <?= $form ?>
  
-    <input type="submit" value="Modifier" />
+    <input type="submit" value="Valider" class="btn btn-outline-info">
+    <button type="button" id="valid" class="btn btn-outline-success">Rejeter</button>
   </p>
 </form>

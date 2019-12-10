@@ -34,7 +34,10 @@ if (empty($comments)):?>
     le <?= $comment['created_at']->format('d/m/Y á H\hi'); ?>
     <?php if ($user->isAuthenticated()): ?> -
       <a href="admin/comment-update-<?= $comment['id'] ?>.html">Modifier</a> |
-      <a href="admin/comment-delete-<?= $comment['id'] ?>.html">Supprimer</a>
+      <a href="admin/comment-delete-<?= $comment['id'] ?>.html" 
+          onclick="return confirm('Voulez-vous supprimer ce commentaire?')">
+        Supprimer
+      </a>
     <?php endif; ?>
   </legend>
   <p><?= nl2br(htmlspecialchars($comment['content'])) ?></p>
