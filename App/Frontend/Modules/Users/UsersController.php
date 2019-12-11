@@ -5,6 +5,7 @@ use \Core\BackController;
 use \Core\HTTPRequest;
 use \Entity\User;
 use \FormBuilder\RegisterFormBuilder;
+use \FormBuilder\LoginFormBuilder;
 use \Core\FormHandler;
  
 class UsersController extends BackController
@@ -12,6 +13,8 @@ class UsersController extends BackController
   public function login(HTTPRequest $request)
   {
     $this->page->addVar('title', 'Connexion');
+
+    $this->processFormLogin($request);
  
     if ($request->postExists('login')) {
       $login = $request->postData('username');
@@ -26,8 +29,6 @@ class UsersController extends BackController
       }
     }
   }
-
-  // TODO :: HASH_PASSWORD AND CONNECT USER AFTER EMAIL VALIDATED. AND SO ON
 
   public function register(HTTPRequest $request)
   {
@@ -80,6 +81,38 @@ class UsersController extends BackController
                       : 'Le profil de l\'utilisateur a été modifié avec succès!');
  
       $this->app->httpResponse()->redirect('/');
+    }
+ 
+    $this->page->addVar('form', $form->createView());
+  }
+
+  private function processFormLogin(HTTPRequest $request)
+  {
+    $user = new User;
+    if ($request->method() == 'POST') {
+      $user = new User([
+        'email' => $request->postData('email'),
+        'password' => $request->postData('password')
+      ]);
+ 
+      if ($request->getExists('id'))
+      {
+        $user->setId($request->getData('id'));
+      }
+    }
+ 
+    $formBuilder = new LoginFormBuilder($user);
+    $formBuilder->build();
+ 
+    $form = $formBuilder->form();
+ 
+    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Users'), $request);
+ 
+    if ($formHandler->process())
+    {
+      $this->app->user()->setFlash("Vous êtes bien connecté!");
+ 
+      $this->app->httpResponse()->redirect('/profil');
     }
  
     $this->page->addVar('form', $form->createView());

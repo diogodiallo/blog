@@ -86,7 +86,7 @@ class User extends Entity
      */ 
     public function password()
     {
-        return $this->password;
+        return password_hash($this->password, PASSWORD_BCRYPT);
     }
 
     /**

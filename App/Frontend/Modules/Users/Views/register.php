@@ -1,4 +1,4 @@
-<h1 class="text-center">Inscription</h1>
+<h1 class="text-center mt-5">Inscription</h1>
 
 <form action="" method="POST">
     <p>

@@ -28,7 +28,7 @@ abstract class UsersManager extends Manager
     }
     else
     {
-      throw new \RuntimeException('L\'utilisateur doit être validé pour être enregistré');
+      throw new \RuntimeException('L\'utilisateur doit être valide pour être enregistré');
     }
   }
  

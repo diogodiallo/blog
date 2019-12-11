@@ -57,7 +57,7 @@
                     </div>
                 <?php else: ?>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/admin/login">
+                        <a class="nav-link" href="/signin">
                             <i class="fa fa-sign-in-alt"></i> Connexion
                         </a>
                     </li>

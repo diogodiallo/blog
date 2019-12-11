@@ -12,7 +12,9 @@
         et le contact humain (avec les autres) reste toujours ma plus grande source d'inspiration.
     </q> 
     <br>
-    <p>Vous pouvez télécharger mon <a href="#">cv</a> au format pdf.</p>
+    <p>Vous pouvez télécharger mon 
+        <a href="/Public/images/CV_dev_php_symfony.pdf" download="CV.pdf">CV</a> au format pdf.
+    </p>
 </div>
 <!-- Design -->
 <!-- Objectif -->
