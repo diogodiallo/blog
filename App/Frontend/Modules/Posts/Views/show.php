@@ -31,14 +31,16 @@ if (empty($comments)):?>
     Posté par <strong>Jean 
           <!--(ici authenticated username) htmlspecialchars($comment['post_id'])-->
         </strong> 
-    le <?= $comment['created_at']->format('d/m/Y á H\hi'); ?>
-    <?php if ($user->isAuthenticated()): ?> -
-      <a href="admin/comment-update-<?= $comment['id'] ?>.html">Modifier</a> |
-      <a href="admin/comment-delete-<?= $comment['id'] ?>.html" 
-          onclick="return confirm('Voulez-vous supprimer ce commentaire?')">
-        Supprimer
-      </a>
-    <?php endif; ?>
+        le <?= $comment['created_at']->format('d/m/Y á H\hi'); ?>
+        <?php if($_SESSION['role_name'] == "Admin" || $_SESSION['role_name'] == "Super Admin"): ?>
+          <?php if ($user->isAuthenticated()): ?> -
+            <a href="admin/comment-update-<?= $comment['id'] ?>.html">Modifier</a> |
+            <a href="admin/comment-delete-<?= $comment['id'] ?>.html" 
+                onclick="return confirm('Voulez-vous supprimer ce commentaire?')">
+              Supprimer
+            </a>
+          <?php endif; ?>
+        <?php endif; ?>
   </legend>
   <p><?= nl2br(htmlspecialchars($comment['content'])) ?></p>
 </fieldset>

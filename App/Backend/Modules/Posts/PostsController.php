@@ -11,7 +11,11 @@ use \Core\FormHandler;
  
 class PostsController extends BackController
 {
-  public function index(HTTPRequest $request)
+
+  const REJECT = 0;
+  const VALIDATE = 1;
+
+  public function index()
   {
     $this->page->addVar('title', 'Gestion des articles');
 
@@ -45,40 +49,45 @@ class PostsController extends BackController
  
   public function updateComment(HTTPRequest $request)
   {
-    $this->page->addVar('title', 'Modification d\'un commentaire');
- 
-    if ($request->method() == 'POST')
-    {
+    
+    if ($request->method() == 'POST') {
       $comment = new Comment([
         'id' => $request->getData('id'),
-        //'auteur' => $request->postData('auteur'),
         'content' => $request->postData('content')
-      ]);
-
-      $this->app->user()->setFlash('Le commentaire a bien été modifié');
- 
-      $this->app->httpResponse()->redirect('/admin/');
-    }
-    else
-    {
-      $comment = $this->managers->getManagerOf('Comments')->get($request->getData('id'));
-    }
- 
-    $formBuilder = new CommentFormBuilder($comment);
-    $formBuilder->build();
- 
-    $form = $formBuilder->form();
- 
-    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comments'), $request);
- 
-    if ($formHandler->process())
-    {
-      $this->app->user()->setFlash('Le commentaire a bien été modifié');
- 
-      $this->app->httpResponse()->redirect('/admin/');
-    }
- 
-    $this->page->addVar('form', $form->createView());
+        ]);
+        
+        $this->app->user()->setFlash('Le commentaire a bien été modifié');
+        
+        $this->app->httpResponse()->redirect('/admin/');
+      } else {
+        $comment = $this->managers->getManagerOf('Comments')->get($request->getData('id'));
+        
+        // TODO : FOR VALIDATE AND REJECT BUTTON
+        if (self::VALIDATE) {
+          $this->page->addVar('validation', $this->managers->getManagerOf('Comments')
+          ->validateComment($comment->id(), 1));
+        } elseif (self::REJECT) {
+          $this->page->addVar('validation', $this->managers->getManagerOf('Comments')
+          ->validateComment($comment->id(), 0));
+        }
+      }
+      
+      $formBuilder = new CommentFormBuilder($comment);
+      $formBuilder->build();
+      
+      $form = $formBuilder->form();
+      
+      $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comments'), $request);
+      
+      if ($formHandler->process())
+      {
+        $this->app->user()->setFlash('Le commentaire a bien été modifié');
+        
+        $this->app->httpResponse()->redirect('/admin/');
+      }
+      
+      $this->page->addVar('title', 'Modification d\'un commentaire');
+      $this->page->addVar('form', $form->createView());
   }
 
   public function delete(HTTPRequest $request)
@@ -111,28 +120,21 @@ class PostsController extends BackController
 
   private function processForm(HTTPRequest $request)
   {
-    if ($request->method() == 'POST')
-    {
+    if ($request->method() == 'POST') {
       $post = new Post([
         'title' => $request->postData('title'),
         'resume' => $request->postData('resume'),
         'content' => $request->postData('content')
       ]);
  
-      if ($request->getExists('id'))
-      {
+      if ($request->getExists('id')) {
         $post->setId($request->getData('id'));
       }
-    }
-    else
-    {
+    } else {
       // L'identifiant de la news est transmis si on veut la modifier
-      if ($request->getExists('id'))
-      {
+      if ($request->getExists('id')) {
         $post = $this->managers->getManagerOf('Posts')->getUnique($request->getData('id'));
-      }
-      else
-      {
+      } else {
         $post = new Post;
       }
     }

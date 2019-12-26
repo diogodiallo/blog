@@ -7,7 +7,9 @@
     <route url="/posts" module="Posts" action="index"></route>
 
     <route url="/register" module="Users" action="register"></route>
-    <route url="/signin" module="Users" action="login"></route>
+    <route url="/confirm" module="Users" action="validateRegistration"></route>
+    <route url="/login" module="Users" action="login"></route>
+    <route url="/profil" module="Users" action="profil"></route>
 
     <route url="/post-([0-9]+)\.html" module="Posts" action="show" vars="id"></route>
     <route url="/commenter-([0-9]+)\.html" module="Posts" action="insertComment" vars="post_id" />

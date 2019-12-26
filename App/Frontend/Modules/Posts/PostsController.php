@@ -31,7 +31,7 @@ class PostsController extends BackController
         $post->setContent($start);
       }
     }
- 
+    
     // Add $post variable on the view.
     $this->page->addVar('posts', $posts);
   }
@@ -84,10 +84,4 @@ class PostsController extends BackController
     $this->page->addVar('title', 'Ajout d\'un commentaire');
   }
 
-/*   public function logout(HTTPRequest $request)
-  {
-      $this->app->user()->setAuthenticated(false);
-      $this->app->user()->setFlash('Vous êtes déconnecté.');
-      $this->app->httpResponse()->redirect('/');
-  } */
 }

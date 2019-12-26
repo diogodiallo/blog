@@ -92,4 +92,15 @@ class PostsManagerPDO extends PostsManager
  
     $requete->execute();
   }
+
+  public function addPostPermission()
+  {
+    $req = $this->dao->prepare("INSERT INTO permissions(module, description) 
+                        VALUES('POSTS', 'Voir un article'),
+                        VALUES('POSTS', 'Ajouter un article'),
+                        VALUES('POSTS', 'Modifier un article'),
+                        VALUES('POSTS', 'Supprimer un article')
+                    ");
+    $req->execute();
+  }
 }

@@ -1,9 +1,9 @@
-<h1>Modifier un commentaire</h1>
+<h1>Modifier le commentaire</h1>
+
 <form action="" method="post">
-  <p>
+  <div>
     <?= $form ?>
- 
-    <input type="submit" value="Valider" class="btn btn-outline-info">
-    <button type="button" id="valid" class="btn btn-outline-success">Rejeter</button>
-  </p>
+  </div>
+  <input type="submit" name="valid" value="Valider" class="btn btn-outline-info">
+  <button type="button" name="reject" class="btn btn-outline-success">Rejeter</button>
 </form>

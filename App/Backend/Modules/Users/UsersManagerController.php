@@ -23,10 +23,4 @@ class UsersManagerController extends BackController
       }
     }
   }
-
-  public function register(HTTPRequest $request)
-  {
-    $this->page->addVar('title', 'Inscription');
-    echo 'Inscription';
-  }
 }

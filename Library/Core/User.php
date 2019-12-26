@@ -38,7 +38,8 @@ class User
   {
     if (!is_bool($authenticated))
     {
-      throw new \InvalidArgumentException('La valeur spécifiée à la méthode User::setAuthenticated() doit être un boolean');
+      throw new \InvalidArgumentException('La valeur spécifiée à la méthode 
+                                            User::setAuthenticated() doit être un boolean');
     }
  
     $_SESSION['auth'] = $authenticated;
@@ -47,5 +48,14 @@ class User
   public function setFlash($value)
   {
     $_SESSION['flash'] = $value;
+  }
+
+  /**
+   ** @param  $module, $id
+   * @return int $id
+   */
+  public function checkPermission($module, $id)
+  {
+    return in_array($id, $_SESSION['user']['permissions'][$module]);
   }
 }

@@ -41,7 +41,8 @@ abstract class Application
       }
  
       // We add the route to the router.
-      $router->addRoute(new Route($route->getAttribute('url'), $route->getAttribute('module'), $route->getAttribute('action'), $vars));
+      $router->addRoute(new Route($route->getAttribute('url'), 
+        $route->getAttribute('module'), $route->getAttribute('action'), $vars));
     }
  
     try
@@ -60,9 +61,10 @@ abstract class Application
  
     // We add the variables of the URL to the $ _GET array.
     $_GET = array_merge($_GET, $matchedRoute->vars());
- 
+    
     // We instantiate the controller.
-    $controllerClass = 'App\\'.$this->name.'\\Modules\\'.$matchedRoute->module().'\\'.$matchedRoute->module().'Controller';
+    $controllerClass = 'App\\'.$this->name.'\\Modules\\'.$matchedRoute->module().'\\'.
+                              $matchedRoute->module().'Controller';
     return new $controllerClass($this, $matchedRoute->module(), $matchedRoute->action());
   }
  

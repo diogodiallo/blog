@@ -37,7 +37,9 @@ class CommentsManagerPDO extends CommentsManager
  
     $q = $this->dao->prepare('SELECT id, post_id, content, created_at 
                               FROM comments 
-                              WHERE post_id = :post_id');
+                              WHERE post_id = :post_id
+                              AND validate = 1
+                              ');
     $q->bindValue(':post_id', $post, \PDO::PARAM_INT);
     $q->execute();
  
@@ -77,15 +79,27 @@ class CommentsManagerPDO extends CommentsManager
 
   public function getListComments()
   {
-    $q = $this->dao->prepare('SELECT id, post_id, created_at, validate, content 
-                              FROM comments 
-                              WHERE validate = 0');
-    $q->execute();
+    $q = $this->dao->query('SELECT id, post_id, created_at, updated_at, validate, content 
+                            FROM comments 
+                            ORDER BY created_at DESC
+                          ');
  
     $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
  
     return $q->fetchAll();
   }
 
-  // TODO :: Add validation comment button
+  public function validateComment($id, $valid)
+  {
+    $q = $this->dao->prepare('UPDATE comments SET validate = :validate, updated_at = NOW()
+                              WHERE id = :id
+                            ');
+    $q->bindValue(':validate', (int) $valid, \PDO::PARAM_INT);
+    $q->bindValue(':id', (int) $id, \PDO::PARAM_INT);
+    $q->execute();
+ 
+    $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
+ 
+    return $q;
+  }
 }

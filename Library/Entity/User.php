@@ -12,6 +12,7 @@ class User extends Entity
     protected $password;
     protected $firstname;
     protected $lastname;
+    protected $token;
     protected $created_at;
 
 
@@ -159,5 +160,13 @@ class User extends Entity
         $this->created_at = $created_at;
 
         return $this;
+    }
+
+    /**
+     * Get the value of token
+     */ 
+    public function token()
+    {
+        return $this->token;
     }
 }
