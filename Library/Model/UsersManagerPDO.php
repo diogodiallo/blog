@@ -79,58 +79,76 @@ class UsersManagerPDO extends UsersManager
 
   public function getUser($user)
   {
-    $sql = 'SELECT u.id, u.role_id, r.name, u.username, u.email, u.password, created_at
+    	$sql = 'SELECT u.id, u.role_id, r.name, u.username, u.email, u.token, u.password, created_at
             FROM users u
             INNER JOIN roles r
               ON u.id = u.role_id
             WHERE u.username = ?
             ORDER BY u.id';
  
-    $req = $this->dao->prepare($sql);
-    $req->execute([$user]);
-    $userConnected = $req->fetch();
-    $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\User');
-    return $userConnected;
+		$req = $this->dao->prepare($sql);
+		$req->execute([$user]);
+		$userConnected = $req->fetch();
+		$req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\User');
+		return $userConnected;
   }
  
   public function getUnique($id)
   {
-    $requete = $this->dao->prepare('SELECT id, username, email, password, lastname, firstname, created_at 
-                                    FROM users 
-                                    WHERE id = :id');
-    $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
-    $requete->execute();
- 
-    $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\User');
- 
-    if ($user = $requete->fetch())
-    {
-      $user->setCreated_at(new \DateTime($user->created_at()));
- 
-      return $user;
-    }
- 
-    return null;
-  }
- 
-  protected function modify(User $user)
-  {
-    $requete = $this->dao->prepare('UPDATE users 
-                                    SET username = :username, email = :email,
-                                      password = :password, firstname = :firstname,
-                                      lastname = :lastname, updated_at = NOW() 
-                                    WHERE id = :id');
- 
-    $requete->bindValue(':username', $user->username());
-    $requete->bindValue(':email', $user->email());
-    $requete->bindValue(':password', $user->password());
-    $requete->bindValue(':firstname', $user->firstname());
-    $requete->bindValue(':lastname', $user->lastname());
-    $requete->bindValue(':id', $user->id(), \PDO::PARAM_INT);
- 
-    $requete->execute();
+		$requete = $this->dao->prepare('SELECT id, username, email, password, lastname, firstname, created_at 
+										FROM users 
+										WHERE id = :id');
+		$requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
+		$requete->execute();
+	
+		$requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\User');
+	
+		if ($user = $requete->fetch())
+		{
+		$user->setCreated_at(new \DateTime($user->created_at()));
+	
+		return $user;
+		}
+	
+		return null;
   }
 
+  public function userAlreadyExist($field, $value, $table)
+  {
+    $query = $this->dao->prepare("SELECT id 
+                                FROM $table
+                                WHERE $field = ?
+                              ");
+    $query->execute([$value]);
+
+    return $query->rowCount();
+  }
+
+  public function findUserBy($username)
+  {
+    $req = $this->dao->prepare("SELECT id, email, username, token 
+                                FROM users
+                                WHERE username = ?  
+                              ");
+    $req->execute([$username]);
+
+    return $req->fetch();                   
+  }
+
+ 
+  public function updateUser($username)
+  {
+		$requete = $this->dao->prepare('UPDATE users 
+										SET isConfirmed = 1, 
+										token = :token,
+                                    	WHERE username = :username
+                                    ');
+	
+		$requete->bindValue(':username', $username);
+		$requete->bindValue(':token', '');
+	
+		$requete->execute();
+  }
 
   /**
    * Gestion des permissions des posts, comments et users modules 

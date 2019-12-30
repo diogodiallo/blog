@@ -1,15 +1,16 @@
 <?php
 const DEFAULT_APP = 'Frontend';
  
-// Si l'application n'est pas valide, on va charger l'application par défaut qui se chargera de générer une erreur 404
+// If the application is not valid, we will load the default application which will generate a 404 error
+
 if (!isset($_GET['app']) || !file_exists(__DIR__.'/../App/'.$_GET['app'])) $_GET['app'] = DEFAULT_APP;
  
-// On commence par inclure la classe nous permettant d'enregistrer nos autoload
+// We start by including the class allowing us to record our autoloads
 require __DIR__.'/../Library/Core/SplClassLoader.php';
 
 //require '../vendor/autoload.php';
  
-// On va ensuite enregistrer les autoloads correspondant à chaque vendor (OCFram, App, Model, etc.)
+// We will then save the autoloads corresponding to each vendor (OCFram, App, Model, etc.)
 $OCFramLoader = new SplClassLoader('Core', __DIR__.'/../Library');
 $OCFramLoader->register();
  
@@ -29,7 +30,7 @@ $formBuilderLoader = new SplClassLoader('Mailer', __DIR__.'/../Library');
 $formBuilderLoader->register();
  
  
-// Il ne nous suffit plus qu'à déduire le nom de la classe et de l'instancier
+// It only remains for us to deduce the name of the class and the instantiator
 $appClass = 'App\\'.$_GET['app'].'\\'.$_GET['app'].'Application';
  
 $app = new $appClass;

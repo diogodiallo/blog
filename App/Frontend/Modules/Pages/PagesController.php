@@ -23,17 +23,18 @@ class PagesController extends BackController
     {
         if ($request->method() == 'POST') {
             $to = $request->postData('email');
-            $name = $request->postData('name');
-            $subject = $request->postData('subject');
             $body = $request->postData('body');
+            $subject = 'Blog de Diogo DIALLO';
+            $name = $request->postData('name');
 
-            $contact = Mailer::sendMail($to, $name, $subject, $body);
+            $contact = Mailer::sendMail($to, $body, $subject, $name);
 
             if ($contact) {
-                $this->app->user()->setFlash('Nous avons bien recu votre message, nous vous en remercions.');
+                $this->app->user()
+                          ->setFlash('Nous avons bien reçu votre message, nous vous en remercions.', 'success');
                 $this->app->httpResponse()->redirect('.');
             }else {
-                $this->app->user()->setFlash('Une erreur inattendue est survenue. Veuillez recommencer!!');
+                $this->app->user()->setFlash('Une erreur inattendue est survenue. Veuillez recommencer!!', 'danger');
                 $this->app->httpResponse()->redirect('./contact');
             }
         }

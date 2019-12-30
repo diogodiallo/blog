@@ -1,6 +1,7 @@
 <?php
 
 namespace Core;
+use \Core\HTTPResponse;
  
 session_start();
  
@@ -45,10 +46,39 @@ class User
     $_SESSION['auth'] = $authenticated;
   }
  
-  public function setFlash($value)
+  public function setFlash($value, $type = 'info')
   {
     $_SESSION['flash'] = $value;
+    $_SESSION['type'] = $type;
   }
+
+  /**
+   * Filter user not authenticated
+   */
+  public function userNotAdmin()
+  {
+	if (!isset($_SESSION['role_name']) && ($_SESSION['role_name'] !== "Admin" 
+		||  $_SESSION['role_name'] !== "Super Admin" )) {
+		header('Location:/login');
+		$this->setFlash('Vous ne disposer pas des droits necessaires pour y accéder!', 'danger');
+		exit();
+    }
+  }
+
+  /**
+   * Filter user connected
+   * If user is connected => redirect to user profil
+   */
+  public function userIsConnected()
+  {
+    if (isset($_SESSION['user'])) {
+		header('Location:/profil');
+		$this->setFlash('Vous êtes déjà connecté, vous ne pouvez accéder à cette page', 'success');
+		exit();
+    }
+  }
+
+
 
   /**
    ** @param  $module, $id

@@ -114,7 +114,7 @@ class PostsController extends BackController
   public function logout()
   {
     $this->app->user()->setAuthenticated(false);
-    $this->app->user()->setFlash('Vous êtes déconnecté!');
+    $this->app->user()->setFlash('Vous êtes maintenant déconnecté!');
     $this->app->httpResponse()->redirect('/');
   }
 

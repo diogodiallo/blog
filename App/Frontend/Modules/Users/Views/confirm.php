@@ -9,4 +9,5 @@
      * donnees => on affiche un message d'erreur et on redirige vers la page d'accueil
      * si aucune erreur n'est detectée => on affiche un message de succes et on redirige 
      * vers la page de connexion
-     */ 
+     */
+    $this->app->httpResponse()->redirect('/login'); 

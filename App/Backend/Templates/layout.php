@@ -1,4 +1,4 @@
-
+<?php $this->app->user()->userNotAdmin(); ?>
 <!doctype html>
 <html lang="fr">
   <head>
@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Diogo DIALLO ">
-    <meta name="generator" content="Jekyll v3.8.5">
+
     <title><?= $title ?? 'Backend du blog'; ?></title>
 
     <!-- Bootstrap core CSS -->
@@ -19,7 +19,7 @@
     <!-- Custom styles for this template -->
     <link href="/Public/css/design.css" rel="stylesheet" type="text/css">
   </head>
-<body>
+<body id="top">
     <header>
         <?php require('navigation.php'); ?>
     </header>
@@ -31,8 +31,8 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="container fixed-bottom">
-        <p class="float-right"><a href="#">Back to top</a></p>
+    <footer class="container fixed-bottom mt-5">
+        <p class="float-right"><a href="#top">Haut de page</a></p>
         <p>&copy; 2017-2019 Company, Inc. &middot; 
             <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
         </p>

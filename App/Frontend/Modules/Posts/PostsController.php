@@ -75,7 +75,7 @@ class PostsController extends BackController
  
     if ($formHandler->process())
     {
-      $this->app->user()->setFlash('Le commentaire a bien été ajouté, merci !');
+      $this->app->user()->setFlash('Le commentaire a bien été ajouté, merci !', 'success');
       $this->app->httpResponse()->redirect('post-'.$request->getData('post_id').'.html');
     }
  

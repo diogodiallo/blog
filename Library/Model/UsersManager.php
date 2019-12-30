@@ -65,5 +65,5 @@ abstract class UsersManager extends Manager
    * @param $user User le user à modifier
    * @return void
    */
-  abstract protected function modify(User $user);
+  //abstract protected function modify(User $user);
 }

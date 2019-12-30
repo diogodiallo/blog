@@ -17,13 +17,11 @@ class BackendApplication extends Application
   {
     if ($this->user->isAuthenticated()) {
       $controller = $this->getController();
-    } else {
-      $controller = new Modules\Users\UsersManagerController($this, 'Users', 'index');
+      $controller->execute();
+      $this->httpResponse->setPage($controller->page());
+      $this->httpResponse->send();
+    }else {
+      $this->httpResponse()->redirect('/login');
     }
-  
-    $controller->execute();
-  
-    $this->httpResponse->setPage($controller->page());
-    $this->httpResponse->send();
   }
 }

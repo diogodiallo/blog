@@ -16,7 +16,7 @@
     <!-- Custom styles for this template -->
     <link href="/Public/css/design.css" rel="stylesheet" type="text/css">
   </head>
-<body>
+<body id="top">
     <header>
         <?php require('navigation.php'); ?>
     </header>
@@ -94,9 +94,11 @@
         </a>
     </div>
         <!-- Content area -->
-        <div class="container">
+        <div class="container mb-5">
             <?php if ($user->hasFlash()): ?> 
-                <p class="alert alert-info text-center"> <?= $user->getFlash() ?> </p> 
+                <p class="alert alert-<?= $_SESSION['type'] ?> text-center"> 
+                    <?= $user->getFlash() ?> 
+                </p> 
             <?php endif; ?>
             <main>
                 <?= $content; ?>
@@ -104,7 +106,7 @@
         </div>
 
         <!-- FOOTER -->
-        <footer class="container fixed-bottom">
+        <footer class="container fixed-bottom mt-5">
             <p class="float-right"><a href="#">Back to top</a></p>
             <p>
                 &copy; <?= date("Y") ?> - <?= date("Y", strtotime("+2 years")) ?> 

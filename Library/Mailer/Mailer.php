@@ -6,7 +6,7 @@ include 'credentialsGmail.php';
 
 class Mailer
 {
-    public static  function sendMail($to,  $name, $subject, $body)
+    public static  function sendMail($to, $username= '', $body, $subject = '', $token = '', $name = '')
     {
         $https['ssl']['verify_peer'] = FALSE;
         $https['ssl']['verify_peer_name'] = FALSE;
@@ -22,15 +22,17 @@ class Mailer
         $mailer = new \Swift_Mailer($transport);
 
         // Create a message
-        $message = (new \Swift_Message('Blog de DD'))
-                        ->setSubject($subject)
-                        ->setFrom([$to => $name])
-                        ->setTo([GMAIL_USERNAME => USER_NAME])
-                        ->setBody($body, 'text/html')
+        $message = new \Swift_Message();
+        $headers = $message->getHeaders();
+        $headers->addTextHeader('X-Mine', 'Mon blog pro');
+
+        $message->setSubject($subject)
+                ->setFrom([$to => $name])
+                ->setTo([$to => $name])
+                ->setBody($body, 'text/html')
         ;
 
         // Send the message
-        $contact = $mailer->send($message);
-        
+        return  $mailer->send($message);
     }
 }
