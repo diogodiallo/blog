@@ -62,7 +62,7 @@ class UsersManagerPDO extends UsersManager
 
   public function getUserBy($identify)
   {
-    $sql = 'SELECT u.id, username, email, r.name, u.password, lastname, firstname, created_at
+    $sql = 'SELECT u.id, username, role_id, email, r.name, u.password, lastname, firstname, created_at
             FROM users u
             INNER JOIN roles r 
               ON r.id = u.role_id
@@ -126,7 +126,7 @@ class UsersManagerPDO extends UsersManager
 
   public function findUserBy($username)
   {
-    $req = $this->dao->prepare("SELECT id, email, username, token 
+    $req = $this->dao->prepare("SELECT id, role_id, email, username, token 
                                 FROM users
                                 WHERE username = ?  
                               ");

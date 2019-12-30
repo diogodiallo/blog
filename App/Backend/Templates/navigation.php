@@ -21,7 +21,7 @@
         </li>
         <?php if ($user->isAuthenticated()): ?>
             <div class="ml-5 d-flex justify-content-end">
-                <?php if($_SESSION['auth']['role_name'] == "Admin" || $_SESSION['auth']['role_name'] == "Super Admin"): ?>
+                <?php if($_SESSION['role_id'] == 2 || $_SESSION['role_id'] == 1): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/">Admin</a>
                     </li>

@@ -27,6 +27,7 @@ class UsersController extends BackController
 
 			$_SESSION['user'] = $identify['username'];
 			$_SESSION['role_name'] = $identify['name'];
+			$_SESSION['role_id'] = $identify['role_id'];
 			$_SESSION['user_firstname'] = $identify['firstname'];
 			$_SESSION['user_lastname'] = $identify['lastname'];
 			$_SESSION['user_created_at'] = $identify['created_at'];
