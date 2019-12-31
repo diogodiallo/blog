@@ -46,10 +46,7 @@ class UsersController extends BackController
 
   public function register(HTTPRequest $request)
   {
-    if ($this->processForm($request)) {
-		exit(var_dump($this->confirmAccount($_GET['username'])));
-		//$this->page->addVar('confirm', $this->confirmAccount($_GET['username']));
-	}
+    $this->processForm($request);
     $this->page->addVar('title', 'Ajout d\'un utilisateur');
   }
 
@@ -128,7 +125,7 @@ class UsersController extends BackController
 				</a>
 			</div>";
 		
-		if (Mailer::sendMail($request->postData('email'), $username, $body, $subject, $token)) {
+		if (Mailer::sendMail($request->postData('email'), $username, $subject, $body, $token)) {
 			$this->app->user()->setFlash($user->isNew() 
 					? 'Un email d\'activation vous a été envoyé!!' 
 					: 'Le profil de l\'utilisateur a été modifié avec succès!', 'success');

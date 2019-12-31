@@ -26,11 +26,21 @@ class Mailer
         $headers = $message->getHeaders();
         $headers->addTextHeader('X-Mine', 'Mon blog pro');
 
-        $message->setSubject($subject)
-                ->setFrom([$to => $name])
+
+        if (!empty(trim($username)) && !empty(trim($token))) {
+            $message
                 ->setTo([$to => $name])
-                ->setBody($body, 'text/html')
-        ;
+                ->setSubject($subject)
+                ->setFrom([GMAIL_USERNAME => USER_NAME])
+                ->setBody($body, 'text/html');
+        }
+        
+        $message
+            ->setTo([GMAIL_USERNAME => USER_NAME])
+            ->setSubject($subject)
+            ->setFrom([$to => $name])
+            ->setBody($body, 'text/html')
+            ;
 
         // Send the message
         return  $mailer->send($message);

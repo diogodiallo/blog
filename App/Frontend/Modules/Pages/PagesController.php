@@ -27,7 +27,7 @@ class PagesController extends BackController
             $subject = 'Blog de Diogo DIALLO';
             $name = $request->postData('name');
 
-            $contact = Mailer::sendMail($to, $body, $subject, $name);
+            $contact = Mailer::sendMail($to, $subject, $body, $name);
 
             if ($contact) {
                 $this->app->user()
