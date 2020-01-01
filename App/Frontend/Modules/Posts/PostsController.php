@@ -39,7 +39,7 @@ class PostsController extends BackController
 	public function show(HTTPRequest $request)
 	{
 		$post = $this->managers->getManagerOf('Posts')->getUnique($request->getData('id'));
-
+		
 		if (empty($post)) {
 			$this->app->httpResponse()->redirect404();
 		}

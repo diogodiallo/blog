@@ -33,14 +33,14 @@ class PostsManagerPDO extends PostsManager
 		$this->dao->exec('DELETE FROM posts WHERE id = ' . (int) $id);
 	}
 
-	public function getList($debut = -1, $limite = -1)
+	public function getList($start = -1, $limit = -1)
 	{
 		$sql = 'SELECT id, title, resume, content, created_at, updated_at 
             FROM posts 
             ORDER BY id DESC';
 
-		if ($debut != -1 || $limite != -1) {
-			$sql .= ' LIMIT ' . (int) $limite . ' OFFSET ' . (int) $debut;
+		if ($start != -1 || $limit != -1) {
+			$sql .= ' LIMIT ' . (int) $limit . ' OFFSET ' . (int) $start;
 		}
 
 		$requete = $this->dao->query($sql);
@@ -60,8 +60,13 @@ class PostsManagerPDO extends PostsManager
 
 	public function getUnique($id)
 	{
-		$requete = $this->dao->prepare('SELECT id, title, resume, content, created_at, updated_at 
-                                    FROM posts WHERE id = :id');
+		$requete = $this->dao->prepare('SELECT p.id, u.id, p.user_id, p.title, p.resume, p.content, u.username, 
+												p.created_at, p.updated_at 
+                                    	FROM posts p
+										LEFT JOIN users u
+										 ON u.id = p.user_id 
+										WHERE p.id = :id
+									');
 		$requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
 		$requete->execute();
 

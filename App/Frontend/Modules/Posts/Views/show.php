@@ -1,4 +1,4 @@
-<p>Post écrit par <em><?= ucfirst($_SESSION['user']) ?></em>, le <?= $post['created_at']->format('d/m/Y à H\hi') ?></p>
+<p>Post écrit par <em><?= ucfirst($post->username) ?></em>, le <?= $post['created_at']->format('d/m/Y à H\hi') ?></p>
 <h2><?= $post['title'] ?></h2>
 <p class="px-3 bg-secondary text-light">
 	<strong>Resumé :</strong> <br>
@@ -38,7 +38,7 @@ if (empty($comments)) : ?>
 		<legend>
 			Posté par <strong><?= $comment['username'] ?? 'Jean'; ?></strong>
 			le <?= $comment['created_at']->format('d/m/Y á H\hi'); ?>
-			<?php if ($_SESSION['role_name'] == "Admin" || $_SESSION['role_name'] == "Super Admin") : ?>
+			<?php if ($user->userIsAdmin()) : ?>
 				<?php if ($user->isAuthenticated()) : ?> -
 					<a href="admin/comment-update-<?= $comment['id'] ?>.html">Modifier</a> |
 					<a href="admin/comment-delete-<?= $comment['id'] ?>.html" onclick="return confirm('Voulez-vous supprimer ce commentaire?')">
@@ -50,3 +50,5 @@ if (empty($comments)) : ?>
 		<p><?= nl2br(htmlspecialchars($comment['content'])) ?></p>
 	</fieldset>
 <?php endforeach; ?>
+
+<p class="text-center"><a href="/posts" class="btn btn-outline-info btn-block">Revenir aux articles</a></p>
