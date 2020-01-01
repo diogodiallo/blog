@@ -28,7 +28,6 @@ abstract class PostsManager extends Manager
     }
     else
     {
-      var_dump($post); exit;
       throw new \RuntimeException('L\'article doit être validé pour être enregistré');
     }
   }
