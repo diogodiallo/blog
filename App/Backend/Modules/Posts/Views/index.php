@@ -2,35 +2,34 @@
 
 <table class="table table-strip">
     <tr>
-       <th>ID</th>
-       <th>Titre</th>
-       <th>Date d'ajout</th>
-       <th>Dernière modification</th>
-       <th>Action</th></tr>
-    <?php foreach ($posts as $post): ?>
-    <tr>
-        <td><?= $post['id']; ?></td>
-        <td><?= $post['title']; ?></td>
-        <td>le <?= $post['created_at']->format('d/m/Y à H\hi'); ?></td>
-        <td>
-            <?= ($post['created_at'] == $post['updated_at'] 
-                ? '-' 
-                : 'le '.$post['updated_at']->format('d/m/Y à H\hi')
-                )
-            ?> 
-        </td>
-        <td>
-            <a href="post-update-<?= $post['id'] ?>.html">
-                <i class="fas fa-pen"></i> Modifier
-            </a>
-            <?php if($_SESSION['role_name'] == "Super Admin"): ?> 
-                <a href="post-delete-<?= $post['id'] ?>.html" 
-                    onclick="return confirm('Voulez-vous supprimer cet article?')">
-                    <i class="fas fa-trash ml-4"></i> Supprimer
-                </a>
-            <?php endif; ?>
-        </td>
+        <th>ID</th>
+        <th>Titre</th>
+        <th>Date d'ajout</th>
+        <th>Dernière modification</th>
+        <th>Action</th>
     </tr>
+    <?php foreach ($posts as $post) : ?>
+        <tr>
+            <td><?= $post['id']; ?></td>
+            <td><?= $post['title']; ?></td>
+            <td>le <?= $post['created_at']->format('d/m/Y à H\hi'); ?></td>
+            <td>
+                <?= ($post['created_at'] == $post['updated_at']
+                    ? '-'
+                    : 'le ' . $post['updated_at']->format('d/m/Y à H\hi'))
+                ?>
+            </td>
+            <td>
+                <a href="post-update-<?= $post['id'] ?>.html">
+                    <i class="fas fa-pen"></i> Modifier
+                </a>
+                <?php if ($_SESSION['role_name'] == "Super Admin") : ?>
+                    <a href="post-delete-<?= $post['id'] ?>.html" onclick="return confirm('Voulez-vous supprimer cet article?')">
+                        <i class="fas fa-trash ml-4"></i> Supprimer
+                    </a>
+                <?php endif; ?>
+            </td>
+        </tr>
     <?php endforeach; ?>
 </table>
 

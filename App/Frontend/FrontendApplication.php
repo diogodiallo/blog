@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Frontend;
 
@@ -11,7 +11,7 @@ class FrontendApplication extends Application
         parent::__construct();
         $this->name = 'Frontend';
     }
-    
+
     public function run()
     {
         $controller = $this->getController();
@@ -21,4 +21,3 @@ class FrontendApplication extends Application
         $this->httpResponse->send();
     }
 }
-    

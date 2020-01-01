@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Frontend\Modules\Pages;
- 
+
 use \Core\BackController;
 use \Core\HTTPRequest;
 use \Mailer\Mailer;
@@ -10,8 +10,8 @@ class PagesController extends BackController
 {
     public function home()
     {
-      $this->page->addVar('title', 'Blog professionnel');
-      $this->page->addVar('home', 'Page d\'accueil du site');
+        $this->page->addVar('title', 'Blog professionnel');
+        $this->page->addVar('home', 'Page d\'accueil du site');
     }
 
     public function about()
@@ -31,10 +31,11 @@ class PagesController extends BackController
 
             if ($contact) {
                 $this->app->user()
-                          ->setFlash('Nous avons bien reçu votre message, nous vous en remercions.', 'success');
+                    ->setFlash('Nous avons bien reçu votre message, nous vous en remercions.', 'success');
                 $this->app->httpResponse()->redirect('.');
-            }else {
-                $this->app->user()->setFlash('Une erreur inattendue est survenue. Veuillez recommencer!!', 'danger');
+            } else {
+                $this->app->user()
+                    ->setFlash('Une erreur inattendue est survenue. Veuillez recommencer!!', 'danger');
                 $this->app->httpResponse()->redirect('./contact');
             }
         }

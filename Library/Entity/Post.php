@@ -3,7 +3,6 @@
 namespace Entity;
 
 use \Core\Entity;
-//use \Cocur\Slugify\Slugify;
 
 class Post extends Entity
 {
@@ -16,15 +15,15 @@ class Post extends Entity
 
     const TITLE_INVALID = 2;
     const CONTENT_INVALID = 3;
-   
+
     public function isValid()
     {
-      return !( empty($this->title) || empty($this->content) );
+        return !(empty($this->title) || empty($this->content));
     }
 
     /**
      * Get the value of id
-     */ 
+     */
     public function id()
     {
         return $this->id;
@@ -34,7 +33,7 @@ class Post extends Entity
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         if ($id > 0) {
@@ -44,7 +43,7 @@ class Post extends Entity
 
     /**
      * Get the value of title
-     */ 
+     */
     public function title()
     {
         return $this->title;
@@ -54,21 +53,20 @@ class Post extends Entity
      * Set the value of title
      *
      * @return  self
-     */ 
+     */
     public function setTitle($title)
     {
-        if (!is_string($title) || empty($title))
-        {
-          $this->errors[] = self::TITLE_INVALID;
+        if (!is_string($title) || empty($title)) {
+            $this->errors[] = self::TITLE_INVALID;
         }
 
-        
-        $this->title = $title;  
+
+        $this->title = $title;
     }
 
     /**
      * Get the value of content
-     */ 
+     */
     public function content()
     {
         return $this->content;
@@ -78,12 +76,11 @@ class Post extends Entity
      * Set the value of content
      *
      * @return  self
-     */ 
+     */
     public function setContent($content)
     {
-        if (!is_string($content) || empty($content))
-        {
-          $this->errors[] = self::CONTENT_INVALID;
+        if (!is_string($content) || empty($content)) {
+            $this->errors[] = self::CONTENT_INVALID;
         }
 
         $this->content = $content;
@@ -91,7 +88,7 @@ class Post extends Entity
 
     /**
      * Get the value of created_at
-     */ 
+     */
     public function created_at()
     {
         return $this->created_at;
@@ -101,7 +98,7 @@ class Post extends Entity
      * Set the value of created_at
      *
      * @return  self
-     */ 
+     */
     public function setCreated_at(\DateTime $created_at)
     {
         $this->created_at = $created_at;
@@ -109,7 +106,7 @@ class Post extends Entity
 
     /**
      * Get the value of updated_at
-     */ 
+     */
     public function updated_at()
     {
         return $this->updated_at;
@@ -119,7 +116,7 @@ class Post extends Entity
      * Set the value of updated_at
      *
      * @return  self
-     */ 
+     */
     public function setUpdated_at(\DateTime $updated_at)
     {
         $this->updated_at = $updated_at;
@@ -127,7 +124,7 @@ class Post extends Entity
 
     /**
      * Get the value of resume
-     */ 
+     */
     public function resume()
     {
         return $this->resume;
@@ -137,11 +134,11 @@ class Post extends Entity
      * Set the value of resume
      *
      * @return  self
-     */ 
+     */
     public function setResume($resume)
     {
         $this->resume = $resume;
 
         return $this;
     }
-} 
+}
