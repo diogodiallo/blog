@@ -1,4 +1,4 @@
-<?php $this->app->user()->userNotAdmin(); ?>
+<?php (!$this->app->user()->userIsAdmin()); ?>
 <!doctype html>
 <html lang="fr">
   <head>

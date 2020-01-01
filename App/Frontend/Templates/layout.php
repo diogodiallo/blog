@@ -44,7 +44,7 @@
                     id nibh ultricies vehicula ut id elit.
                 </p>
                 <p>
-                    <a class="btn btn-lg btn-primary" href="/regsiter.php" role="button">Sign up</a>
+                    <a class="btn btn-lg btn-primary" href="/regsiter.php" role="button">S'inscrire</a>
                 </p>
             </div>
             </div>

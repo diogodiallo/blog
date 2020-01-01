@@ -125,7 +125,7 @@ class UsersController extends BackController
 				</a>
 			</div>";
 		
-		if (Mailer::sendMail($request->postData('email'), $username, $subject, $body, $token)) {
+		if (Mailer::sendMail($request->postData('email'), $username, $body, $subject,  $token)) {
 			$this->app->user()->setFlash($user->isNew() 
 					? 'Un email d\'activation vous a été envoyé!!' 
 					: 'Le profil de l\'utilisateur a été modifié avec succès!', 'success');
