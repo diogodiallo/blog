@@ -18,6 +18,50 @@
 
     <!-- Custom styles for this template -->
     <link href="/Public/css/design.css" rel="stylesheet" type="text/css">
+
+    <style>
+        /* form elements */
+        form {
+            width: 80%;
+            margin:0 auto; padding: 3px 5px;
+            border: 1px solid #f2f2f2; 
+            background-color: #772953; 
+            color: #ffffff;	
+        }
+        label {
+            display:block;
+            font-weight:bold;
+            margin:5px 10px;
+        }
+        input {
+            margin: 3px 10px;
+            padding:3px;
+            border:1px solid #eee;
+            border-radius: 15px;
+            font: normal 1em Verdana, sans-serif;
+            color:#777;
+        }
+        textarea {
+			width: 100%;
+            padding:2px;
+            font: normal 1em Verdana, sans-serif;
+            border:1px solid #eee;
+            height:100px;
+            display:block;
+			color:#777;
+			resize: none;
+        }
+        input.button { 
+            width: 80%;
+            font: bold 24px Arial, Sans-serif; 
+            height: 24px;
+            margin: 0;
+            padding: 2px 3px; 
+            color: #FFF;
+            background: #8EB50C  repeat-x 0 0;
+            border: none;
+        }
+    </style>
   </head>
 <body id="top">
     <header>
