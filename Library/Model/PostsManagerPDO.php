@@ -11,11 +11,13 @@ class PostsManagerPDO extends PostsManager
 		$requete = $this->dao->prepare('INSERT INTO posts 
                                     SET title = :title,
                                         resume = :resume,
+										user_id = :user_id,
                                         content = :content,
                                         created_at = NOW(), 
                                         updated_at = NOW()
                                   ');
 
+		$requete->bindValue(':user_id', $_SESSION['user_id']);
 		$requete->bindValue(':title', $post->title());
 		$requete->bindValue(':resume', $post->resume());
 		$requete->bindValue(':content', $post->content());
@@ -93,16 +95,5 @@ class PostsManagerPDO extends PostsManager
 		$requete->bindValue(':id', $post->id(), \PDO::PARAM_INT);
 
 		$requete->execute();
-	}
-
-	public function addPostPermission()
-	{
-		$req = $this->dao->prepare("INSERT INTO permissions(module, description) 
-                        VALUES('POSTS', 'Voir un article'),
-                        ('POSTS', 'Ajouter un article'),
-                        ('POSTS', 'Modifier un article'),
-                        ('POSTS', 'Supprimer un article')
-                    ");
-		$req->execute();
 	}
 }

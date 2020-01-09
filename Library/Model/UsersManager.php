@@ -3,7 +3,7 @@
 namespace Model;
 
 use \Core\Manager;
-use \Entity\User;
+use \Core\User;
 
 abstract class UsersManager extends Manager
 {

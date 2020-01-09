@@ -42,7 +42,7 @@ class CommentsManagerPDO extends CommentsManager
 									WHERE c.post_id = :post_id
 									AND validate = 1
                               	');
-		$q->bindValue(':post_id', $post, \PDO::PARAM_INT);
+		$q->bindValue(':post_id', (int)$post, \PDO::PARAM_INT);
 		$q->execute();
 
 		$q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');

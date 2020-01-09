@@ -20,10 +20,9 @@
                 ?>
             </td>
             <td>
-                <!-- TODO : FIX VALIDATE LINK IF IS VALIDATE OR REJECT -->
                 <?= ($comment['validate'] == 1)
                     ? "<i class='btn btn-outline-success'>Valider</i>"
-                    : '<a href="comment-update-' . $comment['id'] . '.html"
+                    : '<a href="comment-update-'. $comment['id'] . '.html"
                         class="btn btn-outline-secondary"> <i class="fas fa-pen"> Modérer</i>
                     </a>';
                 ?>

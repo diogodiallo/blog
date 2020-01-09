@@ -35,7 +35,7 @@ class PagesController extends BackController
                 $this->app->httpResponse()->redirect('.');
             } else {
                 $this->app->user()
-                    ->setFlash('Une erreur inattendue est survenue. Veuillez recommencer!!', 'danger');
+                    ->setFlash('Une erreur inattendue est survenue. Veuillez recommencer!', 'danger');
                 $this->app->httpResponse()->redirect('./contact');
             }
         }

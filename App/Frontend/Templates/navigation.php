@@ -28,7 +28,7 @@
                         </li>
                     <?php endif; ?>
                     <li class="nav-item">
-                        <a class="nav-link bg bg-danger text-white" href="/admin/logout.html">
+                        <a class="nav-link bg bg-danger text-white" href="/logout.html">
                             Déconnexion
                         </a>
                     </li>

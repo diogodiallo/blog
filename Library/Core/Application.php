@@ -63,7 +63,21 @@ abstract class Application
 		// We instantiate the controller.
 		$controllerClass = 'App\\' . $this->name . '\\Modules\\' . $matchedRoute->module() . '\\' .
 			$matchedRoute->module() . 'Controller';
-		return new $controllerClass($this, $matchedRoute->module(), $matchedRoute->action());
+		$controller = new $controllerClass($this, $matchedRoute->module(), $matchedRoute->action());
+
+		if ($this->name == 'Backend') {
+			if (!$this->user->isAuthenticated()) {
+				$controllerClass = 'App\\' . $this->name . '\\Modules\\Users\\UsersController';
+				$controller = new $controllerClass($this, 'Users', 'index');
+			} else {
+				if ( !(in_array(strtolower($matchedRoute->action() . ' '
+					. $matchedRoute->module()), $this->user->rights()) ) ) {
+					$this->user()->setFlash('Vous n\'avez pas le droit d\'accéder à l\'action désirée');
+					$this->httpResponse()->redirect('http://perso.test/Public/index.php');
+				}
+			}
+		}
+		return $controller;
 	}
 
 	abstract public function run();

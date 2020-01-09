@@ -47,7 +47,7 @@ class PostsController extends BackController
 		$this->page->addVar('title', $post->title());
 		$this->page->addVar('post', $post);
 		$this->page->addVar('comments', $this->managers->getManagerOf('Comments')
-			->getListOf($post->id()));
+			->getListOf($request->getData('id')));
 	}
 
 	public function insertComment(HTTPRequest $request)
@@ -77,5 +77,12 @@ class PostsController extends BackController
 		$this->page->addVar('comment', $comment);
 		$this->page->addVar('form', $form->createView());
 		$this->page->addVar('title', 'Ajout d\'un commentaire');
+	}
+
+	public function logout()
+	{
+		$this->app->user()->setAuthenticated(false);
+		$this->app->user()->setFlash('Vous êtes maintenant déconnecté!');
+		$this->app->httpResponse()->redirect('/');
 	}
 }

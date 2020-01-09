@@ -23,7 +23,7 @@
                 <a href="post-update-<?= $post['id'] ?>.html">
                     <i class="fas fa-pen"></i> Modifier
                 </a>
-                <?php if ($_SESSION['role_name'] == "Super Admin") : ?>
+                <?php if ($_SESSION['role_name'] == "Admin") : ?>
                     <a href="post-delete-<?= $post['id'] ?>.html" onclick="return confirm('Voulez-vous supprimer cet article?')">
                         <i class="fas fa-trash ml-4"></i> Supprimer
                     </a>

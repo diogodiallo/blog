@@ -63,7 +63,7 @@ class PostsController extends BackController
 		} else {
 			$comment = $this->managers->getManagerOf('Comments')->get($request->getData('id'));
 
-			// TODO : FOR VALIDATE AND REJECT BUTTON
+			// FOR VALIDATE AND REJECT BUTTON?
 			if (self::VALIDATE) {
 				$this->page->addVar('validation', $this->managers->getManagerOf('Comments')
 					->validateComment($comment->id(), 1));
@@ -111,13 +111,6 @@ class PostsController extends BackController
 		$this->app->httpResponse()->redirect('.');
 	}
 
-	public function logout()
-	{
-		$this->app->user()->setAuthenticated(false);
-		$this->app->user()->setFlash('Vous êtes maintenant déconnecté!');
-		$this->app->httpResponse()->redirect('/');
-	}
-
 	private function processForm(HTTPRequest $request)
 	{
 		if ($request->method() == 'POST') {
@@ -131,7 +124,6 @@ class PostsController extends BackController
 				$post->setId($request->getData('id'));
 			}
 		} else {
-			// L'identifiant de la news est transmis si on veut la modifier
 			if ($request->getExists('id')) {
 				$post = $this->managers->getManagerOf('Posts')->getUnique($request->getData('id'));
 			} else {

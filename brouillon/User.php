@@ -6,14 +6,14 @@ use \Core\Entity;
 
 class User extends Entity
 {
-    protected $id;
-    protected $username;
-    protected $email;
-    protected $password;
-    protected $firstname;
-    protected $lastname;
-    protected $token;
-    protected $created_at;
+    public $id;
+    public $username;
+    public $email;
+    public $password;
+    public $firstname;
+    public $lastname;
+    //public $rights;
+    public $created_at;
 
 
     public function isValid()
@@ -163,10 +163,20 @@ class User extends Entity
     }
 
     /**
-     * Get the value of token
-     */
-    public function token()
+     * Get the value of rights
+     */ 
+    /*public function rights()
     {
-        return bin2hex(openssl_random_pseudo_bytes(64));
-    }
+        return isset($_SESSION['rights']) ? $_SESSION['rights'] : $this->rights;
+    }*/
+
+    /**
+     * Set the value of rights
+     *
+     * @return  self
+     */ 
+    /*public function setRights(array $rights)
+    {
+        $_SESSION['rights'] = $rights;
+    }*/
 }

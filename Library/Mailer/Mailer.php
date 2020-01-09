@@ -7,7 +7,7 @@ include 'credentialsGmail.php';
 
 class Mailer
 {
-    public static  function sendMail($to, $username = '', $body, $subject = '', $token = '', $name = '')
+    public static  function sendMail($to, $body, $subject = '', $token = '', $name = '')
     {
         $https['ssl']['verify_peer'] = FALSE;
         $https['ssl']['verify_peer_name'] = FALSE;
@@ -27,20 +27,19 @@ class Mailer
         $headers->addTextHeader('X-Mine', 'Mon blog pro');
 
 
-        if (!empty(trim($username)) && !empty(trim($token))) {
+        if (!empty($token)) {
             $message
                 ->setTo([$to => $name])
                 ->setSubject($subject)
                 ->setFrom([GMAIL_USERNAME => USER_NAME])
                 ->setBody($body, 'text/html');
+        } else {
+            $message
+                ->setTo([GMAIL_USERNAME => USER_NAME])
+                ->setSubject($subject)
+                ->setFrom([$to => $name])
+                ->setBody($body, 'text/html');
         }
-
-        $message
-            ->setTo([GMAIL_USERNAME => USER_NAME])
-            ->setSubject($subject)
-            ->setFrom([$to => $name])
-            ->setBody($body, 'text/html');
-
         // Send the message
         return  $mailer->send($message);
     }

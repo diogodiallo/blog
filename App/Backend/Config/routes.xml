@@ -7,6 +7,4 @@
   <route url="/admin/post-delete-([0-9]+)\.html" module="Posts" action="delete" vars="id" />
   <route url="/admin/comment-update-([0-9]+)\.html" module="Posts" action="updateComment" vars="id" />
   <route url="/admin/comment-delete-([0-9]+)\.html" module="Posts" action="deleteComment" vars="id" />
-  
-  <route url="/admin/logout\.html" module="Posts" action="logout" />
 </routes>

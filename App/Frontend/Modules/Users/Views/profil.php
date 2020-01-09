@@ -6,7 +6,13 @@
         <p>
             <strong>Statut : </strong>
             <em>
-                <?= ($_SESSION['role_name'] === 'Member' ? 'Membre simple' : $_SESSION['role_name']); ?>
+                <?= 
+                    ($_SESSION['user_role_id'] == 1 
+                        ? 'Membre simple' 
+                        : ($_SESSION['user_role_id'] == 2 ? "Admin" : "")
+                    
+                    ); 
+                ?>
             </em> - Inscrit le : <?= date("d-m-Y á H:i", strtotime($userConnected['created_at'])) ?>
         </p>
     </header>
