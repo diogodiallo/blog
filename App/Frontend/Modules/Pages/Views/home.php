@@ -4,7 +4,8 @@
     <strong>Diogo</strong> <em>DIALLO</em>
 </h1>
 <p>
-    <!-- Ma phot de profil ici -->
+    <!-- Ma photo de profil ici -->
+    <img src="/Public/images/logo.png" alt="Logo">
 </p>
 <div class="content">
     <article>
