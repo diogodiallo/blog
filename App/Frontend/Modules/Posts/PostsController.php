@@ -39,7 +39,6 @@ class PostsController extends BackController
 	public function show(HTTPRequest $request)
 	{
 		$post = $this->managers->getManagerOf('Posts')->getUnique($request->getData('id'));
-		
 		if (empty($post)) {
 			$this->app->httpResponse()->redirect404();
 		}
@@ -47,12 +46,11 @@ class PostsController extends BackController
 		$this->page->addVar('title', $post->title());
 		$this->page->addVar('post', $post);
 		$this->page->addVar('comments', $this->managers->getManagerOf('Comments')
-			->getListOf($request->getData('id')));
+			->getListOf($post->id()));
 	}
 
 	public function insertComment(HTTPRequest $request)
 	{
-		// Si le formulaire a été envoyé.
 		if ($request->method() == 'POST') {
 			$comment = new Comment([
 				'post_id' => $request->getData('post_id'),

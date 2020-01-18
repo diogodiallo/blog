@@ -18,7 +18,7 @@
 
 <?php if ($user->isAuthenticated()) : ?>
 	<p>
-		<a href="comment-<?= $post['id'] ?>.html" class="mt-4 btn btn-primary">
+		<a href="/comment-<?= $post['id'] ?>.html" class="mt-4 btn btn-primary">
 			Ajouter un commentaire
 		</a>
 	</p>

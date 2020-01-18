@@ -1,11 +1,10 @@
-<img src="/Public/images/logo.png" alt="Logo">
+<img src="images/logo.png" alt="Logo">
 <h1 class="text-center bg bg-secondary text-white">
     Bienvenue sur le blog de
     <strong>Diogo</strong> <em>DIALLO</em>
 </h1>
 <p>
-    <!-- Ma photo de profil ici -->
-    <img src="/Public/images/logo.png" alt="Logo">
+    <img src="images/photo.jpg" alt="Ma photo">
 </p>
 <div class="content">
     <article>
@@ -16,6 +15,6 @@
     </article>
     <br>
     <p>Vous pouvez télécharger mon
-        <a href="/Public/images/CV_dev_php_symfony.pdf" download="CV.pdf">CV</a> au format pdf.
+        <a href="cv/CV_dev_php_symfony.pdf" download>CV</a>(.pdf).
     </p>
 </div>

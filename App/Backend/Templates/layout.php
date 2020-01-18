@@ -82,8 +82,9 @@
     <!-- FOOTER -->
     <footer class="container fixed-bottom mt-5">
         <p class="float-right"><a href="#top">Haut de page</a></p>
-        <p>&copy; 2017-2019 Company, Inc. &middot;
-            <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
+        <p>
+            &copy; <?= date("Y") ?> - <?= date("Y", strtotime("+2 years")) ?>
+             - Tous droits réservés Diogo DIALLO &middot;
         </p>
     </footer>
 

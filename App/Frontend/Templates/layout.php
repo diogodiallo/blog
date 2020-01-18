@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="/../../Public/css/design.css" type="text/css">
+    <link rel="stylesheet" href="<?= dirname(__DIR__).'\Public\css\design.css'?>" type="text/css">
     <style>
         /* form elements */
         form {
@@ -137,7 +137,7 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-
+        
         <!-- Content area -->
         <div class="container mb-5">
             <?php if ($user->hasFlash()) : ?>
@@ -152,7 +152,6 @@
 
         <!-- FOOTER -->
         <footer class="container fixed-bottom mt-5">
-            <p class="float-right"><a href="#">Back to top</a></p>
             <p>
                 &copy; <?= date("Y") ?> - <?= date("Y", strtotime("+2 years")) ?>
                 <a href="/contact">Contact</a> &middot;

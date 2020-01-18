@@ -101,7 +101,7 @@ class UsersController extends BackController
 			$subject = 'Inscription sur le blog pro de Diogo DIALLO';
 
 			$body = "<div> Vous avez souhaiter vous inscrire sur notre site, merci de
-				<a href=http://perso.test/confirm.html?token=$token>
+				<a href=http://blogpro.diogodiallo.com/confirm.html?token=$token>
 				confirmer votre inscription
 				</a>
 			</div>";

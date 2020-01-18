@@ -62,7 +62,7 @@ class PostsManagerPDO extends PostsManager
 
 	public function getUnique($id)
 	{
-		$requete = $this->dao->prepare('SELECT p.id, u.id, p.user_id, p.title, p.resume, p.content, u.username, 
+		$requete = $this->dao->prepare('SELECT p.id, p.user_id, p.title, p.resume, p.content, u.username, 
 												p.created_at, p.updated_at 
                                     	FROM posts p
 										LEFT JOIN users u

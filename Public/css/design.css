@@ -1,5 +1,9 @@
 /* form elements */
 
+body {
+    background-color: red;
+}
+
 form {
     margin: 10px;
     padding: 0 5px;
