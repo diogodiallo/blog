@@ -51,10 +51,12 @@ class UsersController extends BackController
 
 	public function confirmAccount(HTTPRequest $request)
 	{
-		$token = bin2hex(openssl_random_pseudo_bytes(64));
 		$tokenUrl = $request->getData('token');
 
-		$username = $this->managers->getManagerOf('Users')->getUserBy($request->getData('username'));
+		$users =  $this->managers->getManagerOf('Users')->getUser($tokenUrl);
+		
+		$token = $users['token'];
+		$username = $users['username'];
 
 		if (($token === $tokenUrl)) {
 			$this->managers->getManagerOf('users')->updateUser($username);
@@ -97,18 +99,20 @@ class UsersController extends BackController
 		$formHandler = new FormHandler($form, $this->managers->getManagerOf('Users'), $request);
 
 		if ($formHandler->process()) {
-			$token = bin2hex(openssl_random_pseudo_bytes(64));
+			$users =  $this->managers->getManagerOf('Users')->getAllUsers();
+			$token = $users[0]->token;
+
 			$subject = 'Inscription sur le blog pro de Diogo DIALLO';
 
 			$body = "<div> Vous avez souhaiter vous inscrire sur notre site, merci de
-				<a href=http://blogpro.diogodiallo.com/confirm.html?token=$token>
+				<a href=http://perso.test/confirm-$token.html>
 				confirmer votre inscription
 				</a>
 			</div>";
 
 			if (Mailer::sendMail($request->postData('email'), $body, $subject,  $token)) {
 				$this->app->user()->setFlash($user->isNew()
-					? 'Un email d\'activation vous a été envoyé!!'
+					? 'Vous etes bien inscrit!!'
 					: 'Le profil de l\'utilisateur a été modifié avec succès!', 'success');
 				$this->app->httpResponse()->redirect('/');
 			}

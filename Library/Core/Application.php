@@ -14,7 +14,7 @@ abstract class Application
 	{
 		$this->httpRequest = new HTTPRequest($this);
 		$this->httpResponse = new HTTPResponse($this);
-		$this->user = new User($this);
+		$this->user = new User();
 		$this->config = new Config($this);
 
 		$this->name = '';
@@ -28,6 +28,7 @@ abstract class Application
 		$xml->load('../App/' . $this->name . '/Config/routes.xml');
 
 		$routes = $xml->getElementsByTagName('route');
+
 
 		// We browse the routes of the XML file.
 		foreach ($routes as $route) {

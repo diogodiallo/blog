@@ -5,7 +5,7 @@ namespace Core;
 
 session_start();
 
-class User
+class User extends \Core\Entity
 {
     public $rights;
     public $id;
@@ -245,6 +245,6 @@ class User
      */
     public function userIsAdmin(): bool
     {
-        return ($_SESSION['user_role_id'] == 2) ? true : false;
+        return ($_SESSION['user_role_id'] == 1) ? true : false;
     }
 }

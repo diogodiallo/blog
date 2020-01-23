@@ -9,8 +9,8 @@
             <input type="text" name="name" class="form-control" placeholder="Entrez votre nom">
         </div>
         <div class="form-group">
-            <textarea name="body" cols="30" rows="10" class="form-control">
-                Entrez votre message ici
+            <textarea name="body" cols="30" rows="10" class="form-control" placeholder="Entrez votre message ici">
+                
             </textarea>
         </div>
         <button type="submit" name="send" class="btn btn-outline-success btn-block">Envoyer</button>

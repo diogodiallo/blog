@@ -23,11 +23,11 @@ class PagesController extends BackController
     {
         if ($request->method() == 'POST') {
             $to = $request->postData('email');
-            $body = $request->postData('body');
             $subject = 'Blog de Diogo DIALLO';
+            $body = $request->postData('body');
             $name = $request->postData('name');
 
-            $contact = Mailer::sendMail($to, $subject, $body, $name);
+            $contact = Mailer::sendMail($to, $body, $subject, $name);
 
             if ($contact) {
                 $this->app->user()

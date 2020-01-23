@@ -7,9 +7,9 @@
             <strong>Statut : </strong>
             <em>
                 <?= 
-                    ($_SESSION['user_role_id'] == 1 
+                    ($_SESSION['user_role_id'] == 3 
                         ? 'Membre simple' 
-                        : ($_SESSION['user_role_id'] == 2 ? "Admin" : "")
+                        : ($_SESSION['user_role_id'] == 1 ? "Admin" : "")
                     
                     ); 
                 ?>

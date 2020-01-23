@@ -6,6 +6,8 @@ use \Core\FormBuilder;
 use \Core\StringField;
 use \Core\PasswordField;
 use \Core\TextField;
+use \Core\Entity;
+use \Core\User;
 use \Core\MaxLengthValidator;
 use \Core\NotNullValidator;
 

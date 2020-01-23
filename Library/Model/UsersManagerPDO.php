@@ -14,6 +14,7 @@ class UsersManagerPDO extends UsersManager
                                         password = :password,
                                         lastname = :lastname,
                                         firstname = :firstname,
+										token = :token,
                                         created_at = NOW(),
                                         updated_at = NOW()
                                   ');
@@ -23,6 +24,7 @@ class UsersManagerPDO extends UsersManager
 		$requete->bindValue(':password', $user->password());
 		$requete->bindValue(':lastname', $user->lastname());
 		$requete->bindValue(':firstname', $user->firstname());
+		$requete->bindValue(':token', uniqid("#", true));
 
 		$requete->execute();
 	}
@@ -39,9 +41,9 @@ class UsersManagerPDO extends UsersManager
 
 	public function getAllUsers()
 	{
-		$sql = 'SELECT id, username, email, password, lastname, firstname, created_at
-            FROM users 
-            ORDER BY id DESC';
+		$sql = 'SELECT id, username, email, password, lastname, firstname, token, created_at
+            	FROM users 
+            	ORDER BY id DESC';
 
 		$requete = $this->dao->query($sql);
 		$requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Core\User');
@@ -59,7 +61,8 @@ class UsersManagerPDO extends UsersManager
 
 	public function getUserBy($identify)
 	{
-		$sql = 'SELECT u.id, username, role_id, email, r.role, u.password, lastname, firstname, created_at
+		$sql = 'SELECT u.id, username, role_id, email, r.name, u.password, lastname, 
+						firstname, token, created_at
             FROM users u
             INNER JOIN roles r 
               ON r.id = u.role_id
@@ -76,7 +79,7 @@ class UsersManagerPDO extends UsersManager
 
 	public function getUser($user)
 	{
-		$sql = 'SELECT u.id, u.role_id, r.name, u.username, u.email, u.password, created_at
+		$sql = 'SELECT u.id, u.role_id, r.name, u.username, u.token, u.email, u.password, created_at
             FROM users u
             INNER JOIN roles r
               ON u.id = u.role_id
@@ -168,7 +171,8 @@ class UsersManagerPDO extends UsersManager
 	public function updateUser($username)
 	{
 		$requete = $this->dao->prepare('UPDATE users 
-										SET isConfirmed = 1
+										SET isConfirmed = 1,
+										token = ""
                                     	WHERE username = :username
                                     ');
 
